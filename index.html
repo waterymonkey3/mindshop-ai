@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#f5f4ed">
-<title>MindShop AI — an AI store manager for online shops</title>
-<meta name="description" content="MindShop AI is an AI store manager for e-commerce sites: an agent that learns one shop and runs its content, catalogue and audits through the site's own APIs.">
+<title data-i18n="pageTitle">MindShop AI — an AI store manager for online shops</title>
+<meta name="description" data-i18n="pageDesc" data-i18n-attr="content" content="MindShop AI is an AI store manager for e-commerce sites: an agent that learns one shop and runs its content, catalogue and audits through the site's own APIs.">
 <style>
   :root{
     --paper:#f5f4ed;      /* 主底：暖纸色（Claude 式 parchment） */
@@ -45,6 +45,14 @@
            font-weight:600;padding:8px 14px;border-radius:9px}
   .nav-cta:hover{background:var(--terra)}
   @media(max-width:720px){.nav-links a{display:none}}
+
+  /* ---------- language switch ---------- */
+  .lang{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;flex:0 0 auto}
+  .lang button{appearance:none;-webkit-appearance:none;border:0;background:transparent;cursor:pointer;
+               font:600 12.5px/1 var(--sans);color:var(--mut);padding:8px 10px;letter-spacing:.04em}
+  .lang button:hover{color:var(--ink)}
+  .lang button[aria-pressed="true"]{background:var(--ink);color:#faf9f5}
+  @media print{.lang{display:none}}
 
   /* ---------- bands（区块明暗交替，制造章节感） ---------- */
   .band{padding:86px 0}
@@ -143,6 +151,7 @@
   a{color:var(--terra)}
   code{background:var(--paper);border:1px solid var(--line);padding:2px 6px;border-radius:6px;font-size:13px}
 </style>
+<noscript><style>.lang{display:none}</style></noscript>
 </head>
 <body>
 
@@ -150,12 +159,16 @@
   <div class="nav-in">
     <a class="brand" href="#top"><span class="pname">MindShop AI</span></a>
     <div class="nav-links">
-      <a href="#demo">Demo</a>
-      <a href="#how">How it works</a>
-      <a href="#agent">Capabilities</a>
-      <a href="#status">Status</a>
-      <a href="#contact">Contact</a>
-      <a class="nav-cta" href="deck.html">Project deck &rarr;</a>
+      <a href="#demo" data-i18n="nav.demo">Demo</a>
+      <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#agent" data-i18n="nav.agent">Capabilities</a>
+      <a href="#status" data-i18n="nav.status">Status</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+      <a class="nav-cta" href="deck.html" data-i18n="nav.deck">Project deck &rarr;</a>
+    </div>
+    <div class="lang" role="group" aria-label="Language / Язык">
+      <button type="button" data-setlang="ru" aria-pressed="false">RU</button>
+      <button type="button" data-setlang="en" aria-pressed="true">EN</button>
     </div>
   </div>
 </nav>
@@ -164,9 +177,9 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="kicker">ITMO Accelerator — Fall 2026</div>
-    <h1><span class="pname">MindShop AI</span><br>an AI store manager<br>for online shops</h1>
-    <p class="lead">A shop owner knows the product, not online marketing. <span class="pname">MindShop AI</span>
+    <div class="kicker" data-i18n="hero.kicker">ITMO Accelerator — Fall 2026</div>
+    <h1 data-i18n="hero.title"><span class="pname">MindShop AI</span><br>an AI store manager<br>for online shops</h1>
+    <p class="lead" data-i18n="hero.lead">A shop owner knows the product, not online marketing. <span class="pname">MindShop AI</span>
        is an <b>AI agent the owner talks to</b> — a chat window instead of a dashboard, plain language
        instead of forms. Nothing to install, nothing to learn. It learns
        <b>one specific shop</b>: its live catalogue, its rules, its own publishing history. Then it does the
@@ -176,25 +189,25 @@
        and the same engine is meant for marketplace and storefront platforms next. Nothing goes live without
        the owner's word in the default mode, and every result is read back from the live site.</p>
     <div class="badges">
-      <span class="badge">Working prototype <b>running in production</b></span>
-      <span class="badge">Pilot: <b>a real manufacturing shop</b></span>
-      <span class="badge">Agent core: <b>persistent memory + self-editing procedures</b></span>
-      <span class="badge">Approval mode <b>and full-auto + scheduled runs</b></span>
-      <span class="badge">Zero learning curve: <b>chat, not a dashboard</b></span>
+      <span class="badge" data-i18n="hero.badge1">Working prototype <b>running in production</b></span>
+      <span class="badge" data-i18n="hero.badge2">Pilot: <b>a real manufacturing shop</b></span>
+      <span class="badge" data-i18n="hero.badge3">Agent core: <b>persistent memory + self-editing procedures</b></span>
+      <span class="badge" data-i18n="hero.badge4">Approval mode <b>and full-auto + scheduled runs</b></span>
+      <span class="badge" data-i18n="hero.badge5">Zero learning curve: <b>chat, not a dashboard</b></span>
     </div>
-    <p><a class="btn" href="deck.html">Project deck &rarr;</a></p>
+    <p><a class="btn" href="deck.html" data-i18n="hero.btn">Project deck &rarr;</a></p>
   </div>
 </header>
 
 <section class="band dark" id="demo">
   <div class="wrap">
-    <h2>Demo — 4:54, one take</h2>
+    <h2 data-i18n="demo.h2">Demo — 4:54, one take</h2>
     <!-- video_final-web.mp4 = 网页压缩版（原片 video_final.mp4 留档）。英/俄字幕已烧进画面。 -->
     <video controls preload="metadata" poster="poster.jpg" playsinline>
       <source src="video_final-web.mp4" type="video/mp4">
-      Your browser does not support the video tag. Direct link: <a href="video_final-web.mp4">video_final-web.mp4</a>
+      <span data-i18n="demo.fallback">Your browser does not support the video tag. Direct link: <a href="video_final-web.mp4">video_final-web.mp4</a></span>
     </video>
-    <p class="cap">Six requests typed into one chat, in the order they happened. The agent calls the pilot
+    <p class="cap" data-i18n="demo.cap">Six requests typed into one chat, in the order they happened. The agent calls the pilot
        store's own admin APIs — one for content publishing, one for product management — and reads every
        result back from the live site, so the counts you see are real.</p>
 
@@ -203,42 +216,42 @@
 
 <section class="band" id="how">
   <div class="wrap">
-    <h2>Using it is just talking</h2>
+    <h2 data-i18n="how.h2">Using it is just talking</h2>
     <ul class="ev">
-      <li><b>It reaches you on the platforms you already use.</b> Telegram today — where a Russian seller
+      <li data-i18n="how.ev1"><b>It reaches you on the platforms you already use.</b> Telegram today — where a Russian seller
           already spends the day — and the same agent core plugs into the other major messaging platforms, so
           the shop can be run from wherever the owner and the team actually are, on whatever device is at
           hand.</li>
-      <li><b>Nothing to adopt, nothing to learn.</b> You type a request in plain language and the work gets
+      <li data-i18n="how.ev2"><b>Nothing to adopt, nothing to learn.</b> You type a request in plain language and the work gets
           done. There is no new app to install and no admin panel to sit through — the owners this is built
           for have no marketing team, but every one of them already types messages on a phone.</li>
-      <li><b>The owner speaks business, the agent does the rest.</b> You say <i>"those older products aren't
+      <li data-i18n="how.ev3"><b>The owner speaks business, the agent does the rest.</b> You say <i>"those older products aren't
           good enough"</i> — it reads the catalogue, audits it, reports what it found, and does what you approve.
           No settings screen, no fields to fill in, no training to sit through.</li>
     </ul>
 
-    <h2>What it actually did, request by request</h2>
+    <h2 data-i18n="how.h2b">What it actually did, request by request</h2>
     <ol class="steps">
-      <li><b>Wrote and published an industry article.</b> It drafted the piece from Russian marketplace
+      <li data-i18n="how.step1"><b>Wrote and published an industry article.</b> It drafted the piece from Russian marketplace
           sources, then <b>checked its own published articles for overlap first</b> — <i>"Checked against your
           live articles: no overlap."</i> — and stopped to ask permission before publishing. On approval it
           published through the API and verified on the live site: news total is now 7.</li>
-      <li><b>Created a product the catalogue was missing.</b> It read the live catalogue first
+      <li data-i18n="how.step2"><b>Created a product the catalogue was missing.</b> It read the live catalogue first
           (nine products), found a real gap — <b>no packaging paper at all</b> — and
           proposed one product: category, price, MOQ, specifications and a photo it had verified loads on the
           site. It then waited for an answer. After <i>"Create it!"</i>: id 14, and
           product total is now 10.</li>
-      <li><b>Audited the rest of the catalogue — and stopped at the line it would not cross.</b> Told that the
+      <li data-i18n="how.step3"><b>Audited the rest of the catalogue — and stopped at the line it would not cross.</b> Told that the
           older products were not good enough, it checked them one by one and <b>reported instead of
           editing</b>: repeated specifications on six products, and names that read like a category rather than
           a product. <i>"Both are your call."</i></li>
-      <li><b>Rewrote two listings once the owner pointed at them.</b> On <i>"write 8 and 9"</i> it brought two
+      <li data-i18n="how.step4"><b>Rewrote two listings once the owner pointed at them.</b> On <i>"write 8 and 9"</i> it brought two
           thin descriptions back — 16 → 444 and 20 → 404
           characters — in a fixed five-section structure, and verified both on the live site.</li>
-      <li><b>Translated the same two products into English — and warned first.</b> It wrote the English version
+      <li data-i18n="how.step5"><b>Translated the same two products into English — and warned first.</b> It wrote the English version
           and flagged the consequence <b>before</b> touching the site: <i>"your catalogue would then be
           part-Chinese, part-English."</i> Then it replaced both and checked them live.</li>
-      <li><b>Audited the website and the business — read-only.</b> Asked for advice, it ran an audit that
+      <li data-i18n="how.step6"><b>Audited the website and the business — read-only.</b> Asked for advice, it ran an audit that
           <b>does not touch the code</b> and answered from the site's own weak points instead of generic
           advice: the sitemap covers three URLs out of twenty, and search engines
           can't see the product pages. It also named the search engine that matters here: <i>"Google sometimes
@@ -251,33 +264,33 @@
 
 <section class="band tint" id="agent">
   <div class="wrap">
-    <h2>Why this is an agent, not a writing tool</h2>
+    <h2 data-i18n="agent.h2">Why this is an agent, not a writing tool</h2>
     <div class="agent">
-      <h3>It remembers one shop — and only that shop</h3>
-      <p>Before acting it reads the shop's live catalogue and its own published articles, so decisions are
+      <h3 data-i18n="agent.h31">It remembers one shop — and only that shop</h3>
+      <p data-i18n="agent.p1">Before acting it reads the shop's live catalogue and its own published articles, so decisions are
          grounded in this business rather than in generic best practice. The shop's own rules live in the
          agent's working files — for example <code>Chinese and English listings and articles must contain no
          Cyrillic characters</code>. This knowledge is accumulated <b>per shop</b>: a second shop means
          teaching it a second shop, not shipping different software.</p>
 
-      <h3>It rewrites its own playbook</h3>
-      <p>After finishing the work — <b>without being asked</b> — it reviews what it just did and patches its own
+      <h3 data-i18n="agent.h32">It rewrites its own playbook</h3>
+      <p data-i18n="agent.p2">After finishing the work — <b>without being asked</b> — it reviews what it just did and patches its own
          procedure file, which is visible in the demo. The same mistake should not have to be explained
          twice.</p>
 
-      <h3>Permission gates, on by default</h3>
-      <p>Out of the box, publishing, creating and rewriting stop at a question first; that is the mode you see
+      <h3 data-i18n="agent.h33">Permission gates, on by default</h3>
+      <p data-i18n="agent.p3">Out of the box, publishing, creating and rewriting stop at a question first; that is the mode you see
          in the demo, and what it is unsure about is reported as <i>“your call”</i>. The same workflows also
          run <b>unattended</b>: once the owner trusts the pattern, generation goes live with no approval step,
          and the agent's scheduler triggers the workflows on a timer — the shop owner does nothing at all.</p>
 
-      <h3>It says where its knowledge stops</h3>
-      <p>Asked for advice on the company, it opens by stating what it <b>cannot</b> see — <i>"I can't see your
+      <h3 data-i18n="agent.h34">It says where its knowledge stops</h3>
+      <p data-i18n="agent.p4">Asked for advice on the company, it opens by stating what it <b>cannot</b> see — <i>"I can't see your
          finances, team or capacity"</i> — and answers only from what it can actually read. It refuses to invent
          numbers. Where mistakes cost real orders, that restraint matters more than raw speed.</p>
 
-      <h3>What it is built on</h3>
-      <p><span class="pname">MindShop AI</span> is built on a <b>mature, MIT-licensed open-source agent
+      <h3 data-i18n="agent.h35">What it is built on</h3>
+      <p data-i18n="agent.p5"><span class="pname">MindShop AI</span> is built on a <b>mature, MIT-licensed open-source agent
          architecture</b>. That gives the product, from day one, capabilities that would otherwise take months
          to build — persistent memory across sessions, self-editing procedures, tool permissions, scheduled
          runs. <b>What we build — and where all the engineering goes — is the layer specific to the shop: its
@@ -288,30 +301,30 @@
 
 <section class="band" id="status">
   <div class="wrap">
-    <h2>The problem we are solving</h2>
+    <h2 data-i18n="status.h2">The problem we are solving</h2>
     <div class="grid">
-      <div class="card"><div class="n">01</div><h3>Agencies cost too much</h3>
-        <p>At small-merchant scale, outsourcing content and SEO does not pay back.</p></div>
-      <div class="card"><div class="n">02</div><h3>Generic AI writes generic text</h3>
-        <p>Tools like Jasper or Copy.ai produce plausible copy that knows nothing about the business.</p></div>
-      <div class="card"><div class="n">03</div><h3>Dashboards report, they don't act</h3>
-        <p>Marketplace analytics show data and leave every task to the owner.</p></div>
+      <div class="card"><div class="n">01</div><h3 data-i18n="status.c1t">Agencies cost too much</h3>
+        <p data-i18n="status.c1d">At small-merchant scale, outsourcing content and SEO does not pay back.</p></div>
+      <div class="card"><div class="n">02</div><h3 data-i18n="status.c2t">Generic AI writes generic text</h3>
+        <p data-i18n="status.c2d">Tools like Jasper or Copy.ai produce plausible copy that knows nothing about the business.</p></div>
+      <div class="card"><div class="n">03</div><h3 data-i18n="status.c3t">Dashboards report, they don't act</h3>
+        <p data-i18n="status.c3d">Marketplace analytics show data and leave every task to the owner.</p></div>
     </div>
 
-    <h2>Where we are</h2>
+    <h2 data-i18n="status.h2b">Where we are</h2>
     <ul class="ev">
-      <li>Two workflows run on the live pilot store today: <b>automated collection, writing and publication of
+      <li data-i18n="status.ev1">Two workflows run on the live pilot store today: <b>automated collection, writing and publication of
           industry news</b> (Chinese and Russian sources), and <b>competitor product research → product
           creation and optimisation</b>. Both act through the site's admin APIs.</li>
-      <li><b>Approval mode and full-auto are both built.</b> The demo shows the approval mode, because that is
+      <li data-i18n="status.ev2"><b>Approval mode and full-auto are both built.</b> The demo shows the approval mode, because that is
           the behaviour a shop owner has to be able to trust first. With the gate switched off, the same
           workflows publish with no human in the loop, and the agent's scheduler then triggers them on a timer
           — both modes are available today, and switching between them is a setting.</li>
-      <li><b>The engine is shop-agnostic.</b> It works on a live site through its APIs, so the next targets are
+      <li data-i18n="status.ev3"><b>The engine is shop-agnostic.</b> It works on a live site through its APIs, so the next targets are
           marketplace seller APIs and hosted storefront platforms — the same engine pointed at a different
           backend, not a different product. Multi-shop onboarding and the customer-service workflow (answering
           buyers from the same knowledge base) are still ahead of us.</li>
-      <li>No commercial revenue yet. Everything described above runs today on a live commercial site — the
+      <li data-i18n="status.ev4">No commercial revenue yet. Everything described above runs today on a live commercial site — the
           accelerator is the step that turns it into a business.</li>
     </ul>
   </div>
@@ -321,10 +334,10 @@
   <div class="foot-in">
     <div>
       <div class="fbrand"><span class="pname">MindShop AI</span></div>
-      <p style="margin:10px 0 0;max-width:420px">An AI store manager for e-commerce sites — an agent that learns
+      <p style="margin:10px 0 0;max-width:420px" data-i18n="foot.tagline">An AI store manager for e-commerce sites — an agent that learns
          one shop and runs its content, catalogue and audits through the site's own APIs.</p>
     </div>
-    <div class="fl">
+    <div class="fl" data-i18n="foot.bio">
       Founder: <b>Yu Pengju</b> — solo. MSc Computer Science student at ITMO University (started September
       2026); BSc Computer Science, Hangzhou Dianzi University; one year building MVPs at a cross-border SaaS
       company; family manufacturing background.<br>
@@ -336,11 +349,116 @@
 </footer>
 
 <script>
-  /* ===== 只改这一行：项目名（定下来后整页同步） ===== */
+  /* ===== 只改这一行：项目名 ===== */
   const PROJECT_NAME = "MindShop AI";
 
+  /* ===== 俄语词条：键与页面上 data-i18n 一一对应。英文原文在首次加载时从 HTML 快照，不重复维护 ===== */
+  const RU = {
+  "pageTitle": "MindShop AI — ИИ-менеджер для интернет-магазинов",
+  "pageDesc": "MindShop AI — ИИ-менеджер для интернет-магазинов: агент, который изучает один магазин и ведёт его контент, каталог и аудит через API самого сайта.",
+  "nav.demo": "Демо",
+  "nav.how": "Как это работает",
+  "nav.agent": "Возможности",
+  "nav.status": "Статус",
+  "nav.contact": "Контакты",
+  "nav.deck": "Презентация проекта &rarr;",
+  "hero.kicker": "Акселератор ИТМО — осень 2026",
+  "hero.title": "<span class=\"pname\">MindShop AI</span><br>ИИ-менеджер<br>для интернет-магазинов",
+  "hero.lead": "Владелец магазина знает продукт, но не интернет-маркетинг. <span class=\"pname\">MindShop AI</span> — это <b>ИИ-агент, с которым владелец просто разговаривает</b>: окно чата вместо панели управления, обычные слова вместо форм. Ничего не нужно ставить и осваивать. Он изучает <b>один конкретный магазин</b>: его живой каталог, его правила, его собственную историю публикаций. Дальше он делает работу через настоящие API сайта — пишет и публикует контент, создаёт товары, которых не хватает в каталоге, переписывает слабые карточки, переводит их, проводит аудит сайта и даёт советы по бизнесу. Он сделан для <b>интернет-магазинов, а не для одной отрасли</b> — пилотом оказалось производственное предприятие, — а тот же движок дальше рассчитан на маркетплейсы и платформы готовых витрин. В режиме по умолчанию ничего не публикуется без слова владельца, а каждый результат агент перечитывает с живого сайта.",
+  "hero.badge1": "Работающий прототип <b>уже в продакшене</b>",
+  "hero.badge2": "Пилот: <b>реальное производственное предприятие</b>",
+  "hero.badge3": "Ядро агента: <b>долговременная память + саморедактируемые процедуры</b>",
+  "hero.badge4": "Режим подтверждения <b>и полная автоматика + запуск по расписанию</b>",
+  "hero.badge5": "Нулевой порог входа: <b>чат вместо панели управления</b>",
+  "hero.btn": "Презентация проекта &rarr;",
+  "demo.h2": "Демо — 4:54, один дубль",
+  "demo.fallback": "Ваш браузер не поддерживает видео. Прямая ссылка: <a href=\"video_final-web.mp4\">video_final-web.mp4</a>",
+  "demo.cap": "Шесть запросов, набранных в одном чате, в том порядке, в котором они были. Агент обращается к собственным админ-API пилотного магазина — один отвечает за публикацию контента, второй за управление товарами — и каждый результат перечитывает с живого сайта, поэтому счётчики, которые вы видите, настоящие.",
+  "how.h2": "Пользоваться им — это просто разговор",
+  "how.ev1": "<b>Он приходит туда, где вы уже есть.</b> Сегодня это Telegram — где российский продавец и так проводит весь день, — а то же ядро агента подключается и к другим крупным мессенджерам, так что магазином можно управлять откуда угодно и с любого устройства под рукой.",
+  "how.ev2": "<b>Ничего не нужно внедрять и осваивать.</b> Вы пишете запрос обычными словами — и работа делается. Не нужно ставить новое приложение и разбираться с админкой: у владельцев, для которых это сделано, нет маркетинговой команды, но каждый из них уже пишет сообщения с телефона.",
+  "how.ev3": "<b>Владелец говорит о деле — остальное делает агент.</b> Вы говорите: «старые товары уже не тянут» — он читает каталог, проводит аудит, докладывает, что нашёл, и делает то, что вы одобрите. Ни экрана настроек, ни полей для заполнения, ни обучения.",
+  "how.h2b": "Что он реально сделал — запрос за запросом",
+  "how.step1": "<b>Написал и опубликовал отраслевую статью.</b> Он подготовил текст по источникам с российских маркетплейсов, затем <b>сначала проверил свои уже опубликованные статьи на пересечения</b> — «Сверил с вашими живыми статьями: пересечений нет.» — и остановился, чтобы спросить разрешение перед публикацией. После одобрения опубликовал через API и проверил на живом сайте: всего новостей теперь 7.",
+  "how.step2": "<b>Создал товар, которого не хватало в каталоге.</b> Сначала он прочитал живой каталог (девять товаров), нашёл реальный пробел — <b>упаковочной бумаги нет вообще</b> — и предложил один товар: категорию, цену, минимальную партию, характеристики и фото, которое проверил на загрузку на сайте. Затем дождался ответа. После «Создавай!»: id 14, всего товаров теперь 10.",
+  "how.step3": "<b>Провёл аудит остального каталога — и остановился перед чертой, которую не стал переходить.</b> Услышав, что старые товары уже не тянут, он проверил их по одному и <b>доложил вместо того, чтобы править</b>: дублирующиеся характеристики у шести товаров и названия, которые читаются как категория, а не как товар. «И то и другое — ваше решение.»",
+  "how.step4": "<b>Переписал две карточки, когда владелец указал на них.</b> На «напиши 8 и 9» он вытянул два куцых описания — 16 → 444 и 20 → 404 символов — по фиксированной структуре из пяти разделов и проверил оба на живом сайте.",
+  "how.step5": "<b>Перевёл те же два товара на английский — и сначала предупредил.</b> Он написал английскую версию и предупредил, к чему это приведёт, ещё до того, как тронул сайт: «тогда ваш каталог будет частью на китайском, частью на английском». После этого заменил обе карточки и проверил их на сайте.",
+  "how.step6": "<b>Провёл аудит сайта и бизнеса — только чтение.</b> Когда его попросили о совете, он провёл аудит, который <b>не трогает код</b>, и отвечал не общими словами, а слабыми местами самого сайта: карта сайта покрывает три адреса из двадцати, а поисковики не видят страницы товаров. Он также назвал поисковик, который здесь решает: «Google иногда выполняет JavaScript. Яндекс — нет, а Яндекс и есть ваш рынок». Затем на уровне компании начал с того, чего не видит, и назвал направление, на которое стоит делать ставку: <b>соответствие требованиям FBS и маркировки</b>.",
+  "agent.h2": "Почему это агент, а не инструмент для текстов",
+  "agent.h31": "Он помнит один магазин — и только этот магазин",
+  "agent.p1": "Перед действием он читает живой каталог магазина и свои опубликованные статьи, поэтому решения опираются на этот конкретный бизнес, а не на общие рекомендации. Собственные правила магазина лежат в рабочих файлах агента — например, правило <code>Chinese and English listings and articles must contain no Cyrillic characters</code>. Эти знания накапливаются <b>по магазину</b>: второй магазин — это обучение агента второму магазину, <b>а не другая сборка софта</b>.",
+  "agent.h32": "Он переписывает свою же инструкцию",
+  "agent.p2": "Закончив работу — <b>без всякой просьбы</b> — он разбирает, что только что сделал, и правит собственный файл процедур, что видно в демо. Одну и ту же ошибку не должно приходиться объяснять дважды.",
+  "agent.h33": "Подтверждение по умолчанию",
+  "agent.p3": "Из коробки публикация, создание и правка сначала останавливаются на вопросе; именно этот режим вы видите в демо, а то, в чём агент не уверен, он помечает как <i>«ваше решение»</i>. Те же сценарии работают и <b>без участия человека</b>: когда владелец доверяет схеме, публикация уходит в прод без шага подтверждения, а планировщик агента запускает сценарии по таймеру — от владельца магазина не требуется ничего.",
+  "agent.h34": "Он говорит, где заканчиваются его знания",
+  "agent.p4": "Когда его спрашивают о компании, он начинает с того, чего <b>не</b> видит, — <i>«Я не вижу ваши финансы, команду и мощности»</i> — и отвечает только по тому, что реально может прочитать. Он отказывается выдумывать цифры. Там, где ошибка стоит реальных заказов, эта сдержанность важнее скорости.",
+  "agent.h35": "На чём это построено",
+  "agent.p5": "<span class=\"pname\">MindShop AI</span> построен на <b>зрелой open-source архитектуре агентов под лицензией MIT</b>. Это сразу даёт продукту возможности, на которые иначе ушли бы месяцы: долговременная память между сессиями, саморедактируемые процедуры, права доступа к инструментам, запуск по расписанию. <b>Мы строим — и туда уходит вся инженерия — слой, специфичный для магазина: его знания, его правила, его сценарии.</b>",
+  "status.h2": "Проблема, которую мы решаем",
+  "status.c1t": "Агентства стоят слишком дорого",
+  "status.c1d": "В масштабе небольшого продавца контент и SEO на аутсорсе не окупаются.",
+  "status.c2t": "Универсальный ИИ пишет универсальный текст",
+  "status.c2d": "Инструменты вроде Jasper или Copy.ai выдают правдоподобные тексты, которые ничего не знают о бизнесе.",
+  "status.c3t": "Дашборды отчитываются, но не действуют",
+  "status.c3d": "Аналитика маркетплейсов показывает данные и оставляет все задачи владельцу.",
+  "status.h2b": "Где мы сейчас",
+  "status.ev1": "Сегодня на живом пилотном магазине работают два сценария: <b>автоматический сбор, написание и публикация отраслевых новостей</b> (китайские и российские источники) и <b>исследование товаров конкурентов → создание и оптимизация товаров</b>. Оба действуют через админ-API сайта.",
+  "status.ev2": "<b>Режим подтверждения и полная автоматика уже сделаны.</b> В демо показан режим подтверждения — именно ему владелец магазина должен сначала научиться доверять. Если снять барьер, те же сценарии публикуют без человека в цепочке, а планировщик агента запускает их по таймеру: оба режима доступны уже сегодня, а переключение между ними — это настройка.",
+  "status.ev3": "<b>Движок не привязан к одному магазину.</b> Он работает на живом сайте через его API, поэтому следующие цели — API продавцов маркетплейсов и платформы готовых витрин: тот же движок с другим бэкендом, а не другой продукт. Подключение нескольких магазинов и сценарий клиентской поддержки (ответы покупателям на той же базе знаний) у нас ещё впереди.",
+  "status.ev4": "Коммерческой выручки пока нет. Всё описанное выше уже сегодня работает на живом коммерческом сайте — акселератор и есть шаг, который превращает это в бизнес.",
+  "foot.tagline": "ИИ-менеджер для интернет-магазинов — агент, который изучает один магазин и ведёт его контент, каталог и аудит через API самого сайта.",
+  "foot.bio": "Основатель: <b>Yu Pengju</b> — один человек. Магистрант по компьютерным наукам в Университете ИТМО (начал в сентябре 2026); бакалавр компьютерных наук, Hangzhou Dianzi University (Ханчжоуский университет электроники и технологий); год делал MVP в трансграничной SaaS-компании; вырос в семье с производственным бизнесом.<br><span class=\"pname\">MindShop AI</span> · <span id=\"yr\"></span><br> Telegram <a href=\"https://t.me/WatertMonkey\" target=\"_blank\" rel=\"noopener\">@WatertMonkey</a> &nbsp;·&nbsp; Email <a href=\"mailto:864200476@qq.com\">864200476@qq.com</a>"
+};
+
+  const I18N_KEY = "mindshop-lang";
+  const langNodes = [].slice.call(document.querySelectorAll("[data-i18n]"));
+  const EN = {};
+  langNodes.forEach(function(el){
+    const attr = el.getAttribute("data-i18n-attr");
+    EN[el.getAttribute("data-i18n")] = attr ? el.getAttribute(attr) : el.innerHTML;
+  });
+
+  function langStore(v){
+    try{
+      if (v === undefined) { return localStorage.getItem(I18N_KEY); }
+      localStorage.setItem(I18N_KEY, v);
+    }catch(e){ return null; }
+  }
+  function langFromUrl(){
+    const m = /[?&]lang=([^&]*)/.exec(location.search);
+    const v = m ? decodeURIComponent(m[1]) : null;
+    return (v === "ru" || v === "en") ? v : null;
+  }
+  function applyLang(lang){
+    lang = (lang === "ru") ? "ru" : "en";
+    document.documentElement.lang = lang;
+    langNodes.forEach(function(el){
+      const key = el.getAttribute("data-i18n");
+      const val = (lang === "ru" && RU[key] !== undefined) ? RU[key] : EN[key];
+      if (val === undefined) { return; }
+      const attr = el.getAttribute("data-i18n-attr");
+      if (attr) { el.setAttribute(attr, val); } else { el.innerHTML = val; }
+    });
+    [].forEach.call(document.querySelectorAll("[data-setlang]"), function(b){
+      b.setAttribute("aria-pressed", b.getAttribute("data-setlang") === lang ? "true" : "false");
+    });
+    [].forEach.call(document.querySelectorAll('a[href^="deck.html"]'), function(a){
+      a.setAttribute("href", lang === "ru" ? "deck.html?lang=ru" : "deck.html");
+    });
+    langStore(lang);
+  }
+
+  [].forEach.call(document.querySelectorAll("[data-setlang]"), function(b){
+    b.addEventListener("click", function(){ applyLang(b.getAttribute("data-setlang")); });
+  });
+
+  applyLang(langFromUrl() || langStore() || "en");
+
+  /* ===== 项目名：只改上面 PROJECT_NAME 一处 ===== */
   document.querySelectorAll(".pname").forEach(el => el.textContent = PROJECT_NAME);
-  document.title = PROJECT_NAME + " — an AI store manager for online shops";
+  document.title = document.title.replace("MindShop AI", PROJECT_NAME);
   document.getElementById("yr").textContent = new Date().getFullYear();
 </script>
 </body>

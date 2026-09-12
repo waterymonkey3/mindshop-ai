@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MindShop AI — Project deck (editorial / report variant)</title>
+<title data-i18n="pageTitle">MindShop AI — Project deck (editorial / report variant)</title>
 <style>
   :root{
     --paper:#fcfcfb; --alt:#f7f8f5;
@@ -146,6 +146,21 @@
   .cover .who{margin-top:32px;font-size:15px;color:var(--mut)}
   .cover .who b{color:var(--ink);font-weight:600}
 
+  /* ---------- language switch (screen only) ---------- */
+  .lang{position:fixed;top:12px;right:14px;z-index:200;display:inline-flex;
+        border:1px solid var(--line2);border-radius:8px;overflow:hidden;background:#fff;
+        box-shadow:0 1px 4px rgba(18,20,15,.12);transform-origin:top right}
+  .lang button{appearance:none;-webkit-appearance:none;border:0;background:transparent;cursor:pointer;
+        font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.06em;
+        color:var(--dim);padding:8px 11px}
+  .lang button:hover{color:var(--ink)}
+  .lang button[aria-pressed="true"]{background:var(--acc);color:#fff}
+  .m .ru{display:none}
+  html[lang="ru"] .m .ru{display:block;margin-top:2px;padding-top:4px;
+        border-top:1px solid rgba(0,0,0,.10);font-size:12px;line-height:1.32;opacity:.78}
+  html[lang="ru"] .m.me .ru{border-top-color:rgba(255,255,255,.30)}
+  @media print{.lang{display:none}}
+
   @media print{
     html{background:#fff;zoom:1 !important}
     body{background:#fff}
@@ -153,253 +168,259 @@
     .s:last-child{break-after:auto}
   }
 </style>
+<noscript><style>.lang{display:none}</style></noscript>
 </head>
 <body>
 
+<div class="lang" role="group" aria-label="Language / Язык">
+  <button type="button" data-setlang="ru" aria-pressed="false">RU</button>
+  <button type="button" data-setlang="en" aria-pressed="true">EN</button>
+</div>
+
 <!-- ============ 01 · COVER ============ -->
 <section class="s cover">
-  <div class="hd"><span class="brand">MindShop AI</span><span class="chap">ITMO Accelerator · Fall 2026</span></div>
+  <div class="hd"><span class="brand">MindShop AI</span><span class="chap" data-i18n="d01.chap">ITMO Accelerator · Fall 2026</span></div>
   <div class="bd">
     <h1>MindShop AI</h1>
-    <div class="tagline">An AI store manager for online shops</div>
+    <div class="tagline" data-i18n="d01.tagline">An AI store manager for online shops</div>
     <div class="rule"></div>
-    <p class="lead">You talk to it — and it runs the shop's <b>content, catalogue and audits</b> through the
+    <p class="lead" data-i18n="d01.lead">You talk to it — and it runs the shop's <b>content, catalogue and audits</b> through the
        site's own APIs. It learns one shop, does the work, asks before anything goes live, and reads every
        result back from the live site.</p>
     <div class="tags">
-      <span>Agent, not a writing tool</span>
-      <span>Persistent memory</span>
-      <span>Self-improving</span>
-      <span>API-driven</span>
+      <span data-i18n="d01.tag1">Agent, not a writing tool</span>
+      <span data-i18n="d01.tag2">Persistent memory</span>
+      <span data-i18n="d01.tag3">Self-improving</span>
+      <span data-i18n="d01.tag4">API-driven</span>
     </div>
-    <div class="who"><b>Yu Pengju</b> &nbsp;·&nbsp; MSc Computer Science, ITMO University &nbsp;·&nbsp; September 2026</div>
+    <div class="who" data-i18n="d01.who"><b>Yu Pengju</b> &nbsp;·&nbsp; MSc Computer Science, ITMO University &nbsp;·&nbsp; September 2026</div>
   </div>
-  <div class="ft"><span>Project deck</span><span class="pg">01</span></div>
+  <div class="ft"><span data-i18n="d01.ft">Project deck</span><span class="pg">01</span></div>
 </section>
 
 <!-- ============ 02 · BACKGROUND ============ -->
 <section class="s n02">
-  <div class="hd"><span class="brand">MindShop AI</span><span class="chap">Background</span></div>
+  <div class="hd"><span class="brand">MindShop AI</span><span class="chap" data-i18n="d02.chap">Background</span></div>
   <div class="bd">
-    <h2>A shop owner knows the product — <em>not online marketing</em></h2>
-    <p class="sub">Millions of small sellers on marketplaces and on their own sites can make the product.
+    <h2 data-i18n="d02.h2">A shop owner knows the product — <em>not online marketing</em></h2>
+    <p class="sub" data-i18n="d02.sub">Millions of small sellers on marketplaces and on their own sites can make the product.
        Almost none of them can do the content, the catalogue work and the SEO — and none of them can hire
        for it.</p>
     <div class="rows">
       <div class="row">
         <div class="no">01</div>
-        <div class="t">Agencies cost too much</div>
-        <div class="d">At small-merchant scale, outsourcing content and SEO <b>does not pay back</b>. The
+        <div class="t" data-i18n="d02.r1t">Agencies cost too much</div>
+        <div class="d" data-i18n="d02.r1d">At small-merchant scale, outsourcing content and SEO <b>does not pay back</b>. The
            budget that would make it work is the budget a small shop does not have.</div>
       </div>
       <div class="row">
         <div class="no">02</div>
-        <div class="t">Generic AI writes generic text</div>
-        <div class="d">Tools like Jasper or Copy.ai produce plausible copy that <b>knows nothing about the
+        <div class="t" data-i18n="d02.r2t">Generic AI writes generic text</div>
+        <div class="d" data-i18n="d02.r2d">Tools like Jasper or Copy.ai produce plausible copy that <b>knows nothing about the
            business</b> — because they were never given the business.</div>
       </div>
       <div class="row">
         <div class="no">03</div>
-        <div class="t">Dashboards report, they don't act</div>
-        <div class="d">Marketplace analytics show data and <b>leave every task to the owner</b>. Knowledge is
+        <div class="t" data-i18n="d02.r3t">Dashboards report, they don't act</div>
+        <div class="d" data-i18n="d02.r3d">Marketplace analytics show data and <b>leave every task to the owner</b>. Knowledge is
            not the bottleneck; execution is.</div>
       </div>
     </div>
-    <p class="kicker-out">So good small shops stay invisible — while competitors with a marketing team win.</p>
+    <p class="kicker-out" data-i18n="d02.out">So good small shops stay invisible — while competitors with a marketing team win.</p>
   </div>
-  <div class="ft"><span>ITMO Accelerator · Fall 2026</span><span class="pg">02</span></div>
+  <div class="ft"><span data-i18n="deck.footer">ITMO Accelerator · Fall 2026</span><span class="pg">02</span></div>
 </section>
 
 <!-- ============ 03 · SOLUTION ============ -->
 <section class="s alt n03">
-  <div class="hd"><span class="brand">MindShop AI</span><span class="chap">Solution</span></div>
+  <div class="hd"><span class="brand">MindShop AI</span><span class="chap" data-i18n="d03.chap">Solution</span></div>
   <div class="bd">
-    <h2>One chat window instead of a dashboard</h2>
+    <h2 data-i18n="d03.h2">One chat window instead of a dashboard</h2>
     <div class="split">
       <div class="pts">
-        <div class="pt">An AI agent that <b>learns one shop</b> — its live catalogue, its rules, its own
+        <div class="pt" data-i18n="d03.p1">An AI agent that <b>learns one shop</b> — its live catalogue, its rules, its own
           publishing history.</div>
-        <div class="pt">It acts through the shop's <b>real APIs</b>, and the results land on the live site —
+        <div class="pt" data-i18n="d03.p2">It acts through the shop's <b>real APIs</b>, and the results land on the live site —
           you can watch the counts change.</div>
-        <div class="pt">In the default mode, <b>nothing goes live</b> without the owner's word.</div>
-        <div class="pt">Every result is <b>read back from the live site</b>, so what it reports is what is
+        <div class="pt" data-i18n="d03.p3">In the default mode, <b>nothing goes live</b> without the owner's word.</div>
+        <div class="pt" data-i18n="d03.p4">Every result is <b>read back from the live site</b>, so what it reports is what is
           actually there.</div>
       </div>
       <div>
         <div class="win">
-          <div class="bar"><span class="dot"></span>@MindShopBot — one chat window</div>
+          <div class="bar"><span class="dot"></span><span data-i18n="d03.bar">@MindShopBot — one chat window</span></div>
           <div class="msgs">
-            <div class="m me">Hi! please help me write a news and upload to my website.</div>
-            <div class="m ai">Draft ready. Checked against your live articles: no overlap.
-              <b>Shall I publish it?</b></div>
-            <div class="m me">publish it.</div>
-            <div class="m ai">Published. <b>Verified on the live site — news total is now 7.</b></div>
+            <div class="m me"><span class="orig">Hi! please help me write a news and upload to my website.</span><span class="ru">Привет! Помоги, пожалуйста, написать новость и выложить её на мой сайт.</span></div>
+            <div class="m ai"><span class="orig">Draft ready. Checked against your live articles: no overlap.
+              <b>Shall I publish it?</b></span><span class="ru">Черновик готов. Сверил с вашими живыми статьями: пересечений нет. <b>Публиковать?</b></span></div>
+            <div class="m me"><span class="orig">publish it.</span><span class="ru">публикуй.</span></div>
+            <div class="m ai"><span class="orig">Published. <b>Verified on the live site — news total is now 7.</b></span><span class="ru">Опубликовано. <b>Проверено на живом сайте — всего новостей теперь 7.</b></span></div>
           </div>
         </div>
-        <div class="note">Verbatim from the demo recording — not written for this deck.</div>
+        <div class="note" data-i18n="d03.note">Verbatim from the demo recording — not written for this deck.</div>
       </div>
     </div>
   </div>
-  <div class="ft"><span>ITMO Accelerator · Fall 2026</span><span class="pg">03</span></div>
+  <div class="ft"><span data-i18n="deck.footer">ITMO Accelerator · Fall 2026</span><span class="pg">03</span></div>
 </section>
 
 <!-- ============ 04 · SOLUTION: WHY AN AGENT ============ -->
 <section class="s n04">
-  <div class="hd"><span class="brand">MindShop AI</span><span class="chap">Solution</span></div>
+  <div class="hd"><span class="brand">MindShop AI</span><span class="chap" data-i18n="d03.chap">Solution</span></div>
   <div class="bd">
-    <h2>Four behaviours a prompt cannot give you</h2>
+    <h2 data-i18n="d04.h2">Four behaviours a prompt cannot give you</h2>
     <div class="rows" style="margin-top:22px">
       <div class="row">
         <div class="no">01</div>
-        <div class="t">It remembers one shop</div>
-        <div class="d">Before acting it reads the live catalogue and its own published articles. The shop's
+        <div class="t" data-i18n="d04.r1t">It remembers one shop</div>
+        <div class="d" data-i18n="d04.r1d">Before acting it reads the live catalogue and its own published articles. The shop's
            rules live in its working files — e.g. <b>Chinese and English listings and articles must contain
            no Cyrillic characters</b>. Knowledge accumulates per shop: a second shop means teaching it a
            second shop, <b>not shipping different software</b>.</div>
       </div>
       <div class="row">
         <div class="no">02</div>
-        <div class="t">It rewrites its own playbook</div>
-        <div class="d">After finishing the work — <b>unprompted</b> — it reviews what it just did and patches
+        <div class="t" data-i18n="d04.r2t">It rewrites its own playbook</div>
+        <div class="d" data-i18n="d04.r2d">After finishing the work — <b>unprompted</b> — it reviews what it just did and patches
            its own procedure file. The same mistake should not have to be explained twice.</div>
       </div>
       <div class="row">
         <div class="no">03</div>
-        <div class="t">Permission gates, by default</div>
-        <div class="d">Publishing, creating and rewriting stop at a question first. Anything it is unsure
+        <div class="t" data-i18n="d04.r3t">Permission gates, by default</div>
+        <div class="d" data-i18n="d04.r3d">Publishing, creating and rewriting stop at a question first. Anything it is unsure
            about is reported as <i>"your call"</i> — never changed silently behind the owner's back.</div>
       </div>
       <div class="row">
         <div class="no">04</div>
-        <div class="t">It says where its knowledge stops</div>
-        <div class="d">Asked about the company, it opens with <i>"I can't see your finances, team or
+        <div class="t" data-i18n="d04.r4t">It says where its knowledge stops</div>
+        <div class="d" data-i18n="d04.r4d">Asked about the company, it opens with <i>"I can't see your finances, team or
            capacity"</i> — and answers only from what it can read. <b>It refuses to invent numbers.</b></div>
       </div>
     </div>
   </div>
-  <div class="ft"><span>ITMO Accelerator · Fall 2026</span><span class="pg">04</span></div>
+  <div class="ft"><span data-i18n="deck.footer">ITMO Accelerator · Fall 2026</span><span class="pg">04</span></div>
 </section>
 
 <!-- ============ 05 · SOLUTION: EASE OF USE ============ -->
 <section class="s alt n05">
-  <div class="hd"><span class="brand">MindShop AI</span><span class="chap">Solution</span></div>
+  <div class="hd"><span class="brand">MindShop AI</span><span class="chap" data-i18n="d03.chap">Solution</span></div>
   <div class="bd">
-    <h2>Reachable on <em>the platforms you already use</em></h2>
-    <p class="sub">The shop is operated from a messenger — Telegram first, with the same agent core behind
+    <h2 data-i18n="d05.h2">Reachable on <em>the platforms you already use</em></h2>
+    <p class="sub" data-i18n="d05.sub">The shop is operated from a messenger — Telegram first, with the same agent core behind
        the other major messaging platforms.</p>
     <div class="rows">
       <div class="row">
         <div class="no">01</div>
-        <div class="t">It comes to where the owner already is</div>
-        <div class="d">Telegram today, where a Russian seller already spends the day. The same agent core
+        <div class="t" data-i18n="d05.r1t">It comes to where the owner already is</div>
+        <div class="d" data-i18n="d05.r1d">Telegram today, where a Russian seller already spends the day. The same agent core
            connects to <b>the other major messaging platforms</b>, so the shop can be run from wherever the
            owner and the team actually are — one agent, many doors.</div>
       </div>
       <div class="row">
         <div class="no">02</div>
-        <div class="t">Nothing to adopt, nothing to learn</div>
-        <div class="d">You type a request in plain language and the work gets done. <b>No new app to install
+        <div class="t" data-i18n="d05.r2t">Nothing to adopt, nothing to learn</div>
+        <div class="d" data-i18n="d05.r2d">You type a request in plain language and the work gets done. <b>No new app to install
            and no admin panel to sit through</b> — the owners this is built for have no marketing team, but
            every one of them already types messages on a phone.</div>
       </div>
       <div class="row">
         <div class="no">03</div>
-        <div class="t">Hands-off whenever you want it</div>
-        <div class="d">The demo shows the approval mode — every publish stops for a yes/no. Switch the gate
+        <div class="t" data-i18n="d05.r3t">Hands-off whenever you want it</div>
+        <div class="d" data-i18n="d05.r3d">The demo shows the approval mode — every publish stops for a yes/no. Switch the gate
            off and the same workflows <b>publish unattended</b>, triggered by the agent's scheduler on a
            timer. <b>Both modes are built in today.</b></div>
       </div>
     </div>
-    <p class="kicker-out">You speak business — <i>"those older products aren't good enough"</i> — and the
+    <p class="kicker-out" data-i18n="d05.out">You speak business — <i>"those older products aren't good enough"</i> — and the
        agent does the rest.</p>
   </div>
-  <div class="ft"><span>ITMO Accelerator · Fall 2026</span><span class="pg">05</span></div>
+  <div class="ft"><span data-i18n="deck.footer">ITMO Accelerator · Fall 2026</span><span class="pg">05</span></div>
 </section>
 
 <!-- ============ 06 · RESULTS: EVIDENCE ============ -->
 <section class="s n06">
-  <div class="hd"><span class="brand">MindShop AI</span><span class="chap">Results · 4:54, one take</span></div>
+  <div class="hd"><span class="brand">MindShop AI</span><span class="chap" data-i18n="d06.chap">Results · 4:54, one take</span></div>
   <div class="bd">
-    <h2>Six requests, six real outcomes</h2>
-    <p class="sub">Typed into one chat, in this order, in a single unedited take. Every outcome below was
+    <h2 data-i18n="d06.h2">Six requests, six real outcomes</h2>
+    <p class="sub" data-i18n="d06.sub">Typed into one chat, in this order, in a single unedited take. Every outcome below was
        <b>verified on the live site</b> by the agent itself.</p>
     <div class="tl">
       <div class="li"><div class="tc">0:19</div>
-        <div class="tk">Wrote and published an article<br><span>after checking its own posts for overlap</span></div>
-        <div class="tvNone">Content publishing</div></div>
+        <div class="tk" data-i18n="d06.t1">Wrote and published an article<br><span>after checking its own posts for overlap</span></div>
+        <div class="tv" data-i18n="d06.l1">Content publishing</div></div>
       <div class="li"><div class="tc">0:44</div>
-        <div class="tk">Created a product the catalogue was missing<br><span>no packaging paper at all</span></div>
-        <div class="tvNone">Catalogue management</div></div>
+        <div class="tk" data-i18n="d06.t2">Created a product the catalogue was missing<br><span>no packaging paper at all</span></div>
+        <div class="tv" data-i18n="d06.l2">Catalogue management</div></div>
       <div class="li"><div class="tc">2:00</div>
-        <div class="tk">Audited the catalogue and reported instead of editing<br><span>"both are your call"</span></div>
-        <div class="tv n">Quality audit</div></div>
+        <div class="tk" data-i18n="d06.t3">Audited the catalogue and reported instead of editing<br><span>"both are your call"</span></div>
+        <div class="tv n" data-i18n="d06.l3">Quality audit</div></div>
       <div class="li"><div class="tc">2:36</div>
-        <div class="tk">Rewrote two listings on request<br><span>fixed five-section structure</span></div>
-        <div class="tvNone">Copywriting</div></div>
+        <div class="tk" data-i18n="d06.t4">Rewrote two listings on request<br><span>fixed five-section structure</span></div>
+        <div class="tv" data-i18n="d06.l4">Copywriting</div></div>
       <div class="li"><div class="tc">3:00</div>
-        <div class="tk">Translated both into English<br><span>warned about a mixed catalogue first</span></div>
-        <div class="tv n">Localisation</div></div>
+        <div class="tk" data-i18n="d06.t5">Translated both into English<br><span>warned about a mixed catalogue first</span></div>
+        <div class="tv n" data-i18n="d06.l5">Localisation</div></div>
       <div class="li"><div class="tc">4:11</div>
-        <div class="tk">Audited the site and the business<br><span>read-only, code untouched</span></div>
-        <div class="tvNone">Site &amp; business diagnosis</div></div>
+        <div class="tk" data-i18n="d06.t6">Audited the site and the business<br><span>read-only, code untouched</span></div>
+        <div class="tv" data-i18n="d06.l6">Site &amp; business diagnosis</div></div>
     </div>
   </div>
-  <div class="ft"><span>ITMO Accelerator · Fall 2026</span><span class="pg">06</span></div>
+  <div class="ft"><span data-i18n="deck.footer">ITMO Accelerator · Fall 2026</span><span class="pg">06</span></div>
 </section>
 
 <!-- ============ 07 · RESULTS: STATUS (deep band) ============ -->
 <section class="s deep n07">
-  <div class="hd"><span class="brand">MindShop AI</span><span class="chap">Results · status</span></div>
+  <div class="hd"><span class="brand">MindShop AI</span><span class="chap" data-i18n="d07.chap">Results · status</span></div>
   <div class="bd">
-    <h2>It runs on a <em>live commercial site</em> today</h2>
+    <h2 data-i18n="d07.h2">It runs on a <em>live commercial site</em> today</h2>
     <ul class="facts">
-      <li><span>Two workflows are live today: <b>news collection, writing and publication</b> (Chinese and
+      <li><span data-i18n="d07.f1">Two workflows are live today: <b>news collection, writing and publication</b> (Chinese and
         Russian sources) and <b>competitor research → product creation and optimisation</b>. Both act
         through the site's own admin APIs.</span></li>
-      <li><span>Both run in <b>two modes</b>: approval-first, which the demo shows, and fully unattended,
+      <li><span data-i18n="d07.f2">Both run in <b>two modes</b>: approval-first, which the demo shows, and fully unattended,
         where generation goes live with no approval step and the agent's scheduler triggers it on a
         timer.</span></li>
-      <li><span>The pilot is <b>one real factory</b> — a normal small manufacturer, operating normally while
+      <li><span data-i18n="d07.f3">The pilot is <b>one real factory</b> — a normal small manufacturer, operating normally while
         the agent works on its live site.</span></li>
-      <li><span><b>Where it stops today:</b> no commercial revenue yet, no second shop onboarded, and the
+      <li><span data-i18n="d07.f4"><b>Where it stops today:</b> no commercial revenue yet, no second shop onboarded, and the
         customer-service workflow is planned rather than built.</span></li>
-      <li><span>Everything claimed here is visible in the <b>4:54 recording</b> — the video is the evidence,
+      <li><span data-i18n="d07.f5">Everything claimed here is visible in the <b>4:54 recording</b> — the video is the evidence,
         this deck is only the summary.</span></li>
     </ul>
   </div>
-  <div class="ft"><span>ITMO Accelerator · Fall 2026</span><span class="pg">07</span></div>
+  <div class="ft"><span data-i18n="deck.footer">ITMO Accelerator · Fall 2026</span><span class="pg">07</span></div>
 </section>
 
 <!-- ============ 08 · VISION ============ -->
 <section class="s n08">
-  <div class="hd"><span class="brand">MindShop AI</span><span class="chap">Vision</span></div>
+  <div class="hd"><span class="brand">MindShop AI</span><span class="chap" data-i18n="d08.chap">Vision</span></div>
   <div class="bd">
-    <h2>Same engine, <em>next backends</em></h2>
+    <h2 data-i18n="d08.h2">Same engine, <em>next backends</em></h2>
     <div class="stack">
       <div class="layer">
-        <div class="lb">The core · open source (MIT)</div>
-        <div class="tx">Built on a <b>mature, MIT-licensed open-source agent architecture</b>. The product
+        <div class="lb" data-i18n="d08.l1lb">The core · open source (MIT)</div>
+        <div class="tx" data-i18n="d08.l1tx">Built on a <b>mature, MIT-licensed open-source agent architecture</b>. The product
           starts with capabilities that would otherwise take months to build — persistent memory,
           self-editing procedures, tool permissions, scheduled runs. <b>All of the engineering then goes
           into the layer that is specific to the shop.</b></div>
       </div>
       <div class="layer l2">
-        <div class="lb">The product</div>
-        <div class="tx">On top of that core we build the shop-specific layer: its knowledge and rules, the
+        <div class="lb" data-i18n="d08.l2lb">The product</div>
+        <div class="tx" data-i18n="d08.l2tx">On top of that core we build the shop-specific layer: its knowledge and rules, the
           content and catalogue workflows, the operating procedures, and the API integrations that let the
           agent act on a real shop instead of talking about one.</div>
       </div>
       <div class="layer l3">
-        <div class="lb">What's next</div>
-        <div class="tx"><b>Per shop, not per industry.</b> Multi-shop onboarding, the customer-service
+        <div class="lb" data-i18n="d08.l3lb">What's next</div>
+        <div class="tx" data-i18n="d08.l3tx"><b>Per shop, not per industry.</b> Multi-shop onboarding, the customer-service
           workflow, and the same engine pointed at marketplace seller APIs and hosted storefronts — a
           different backend, not a different product.</div>
       </div>
     </div>
     <div class="cta">
       <div>
-        <div class="k">Live demo &amp; 4:54 video</div>
-        <div class="v"> <a href="https://waterymonkey3.github.io/mindshop-ai/">https://waterymonkey3.github.io/mindshop-ai/</a></div>
+        <div class="k" data-i18n="d08.ctak">Live demo &amp; 4:54 video</div>
+        <div class="v"> <a data-live="https://waterymonkey3.github.io/mindshop-ai/" href="https://waterymonkey3.github.io/mindshop-ai/">https://waterymonkey3.github.io/mindshop-ai/</a></div>
       </div>
       <div style="text-align:right">
         <div class="k">Yu Pengju · MindShop AI</div>
@@ -407,15 +428,142 @@
       </div>
     </div>
   </div>
-  <div class="ft"><span>ITMO Accelerator · Fall 2026</span><span class="pg">08</span></div>
+  <div class="ft"><span data-i18n="deck.footer">ITMO Accelerator · Fall 2026</span><span class="pg">08</span></div>
 </section>
 
 <script>
+  /* ===== 俄语词条：键与页面上 data-i18n 一一对应。英文原文首次加载时从 HTML 快照 ===== */
+  var RU = {
+  "pageTitle": "MindShop AI — презентация проекта (редакционный / отчётный вариант)",
+  "deck.footer": "Акселератор ИТМО · осень 2026",
+  "d01.chap": "Акселератор ИТМО · осень 2026",
+  "d01.tagline": "ИИ-менеджер для интернет-магазинов",
+  "d01.lead": "Вы разговариваете с ним — а он ведёт <b>контент, каталог и аудит</b> магазина через API самого сайта. Он изучает один магазин, делает работу, спрашивает перед публикацией и перечитывает каждый результат с живого сайта.",
+  "d01.tag1": "Агент, а не инструмент для текстов",
+  "d01.tag2": "Долговременная память",
+  "d01.tag3": "Сам себя улучшает",
+  "d01.tag4": "Работает через API",
+  "d01.who": "<b>Yu Pengju</b> &nbsp;·&nbsp; магистратура по компьютерным наукам, Университет ИТМО &nbsp;·&nbsp; сентябрь 2026",
+  "d01.ft": "Презентация проекта",
+  "d02.chap": "Контекст",
+  "d02.h2": "Владелец магазина знает продукт — <em>а не интернет-маркетинг</em>",
+  "d02.sub": "Миллионы небольших продавцов на маркетплейсах и на своих сайтах умеют делать продукт. Почти никто из них не умеет делать контент, работу с каталогом и SEO — и никто не может позволить себе нанять людей под это.",
+  "d02.r1t": "Агентства стоят слишком дорого",
+  "d02.r1d": "В масштабе небольшого продавца контент и SEO на аутсорсе <b>не окупаются</b>. Бюджет, при котором это работало бы, у маленького магазина просто отсутствует.",
+  "d02.r2t": "Универсальный ИИ пишет универсальный текст",
+  "d02.r2d": "Инструменты вроде Jasper или Copy.ai выдают правдоподобные тексты, которые <b>ничего не знают о бизнесе</b> — потому что бизнес им никто не давал.",
+  "d02.r3t": "Дашборды отчитываются, но не действуют",
+  "d02.r3d": "Аналитика маркетплейсов показывает данные и <b>оставляет все задачи владельцу</b>. Узкое место — не знание, а исполнение.",
+  "d02.out": "В итоге хорошие маленькие магазины остаются незаметными — а выигрывают конкуренты с маркетинговой командой.",
+  "d03.chap": "Решение",
+  "d03.h2": "Одно окно чата вместо панели управления",
+  "d03.p1": "ИИ-агент, который <b>изучает один магазин</b> — его живой каталог, его правила, его собственную историю публикаций.",
+  "d03.p2": "Он действует через <b>настоящие API</b> магазина, и результаты появляются на живом сайте — счётчики меняются у вас на глазах.",
+  "d03.p3": "В режиме по умолчанию <b>ничего не публикуется</b> без слова владельца.",
+  "d03.p4": "Каждый результат <b>перечитывается с живого сайта</b>, поэтому в отчёте именно то, что там действительно есть.",
+  "d03.bar": "@MindShopBot — одно окно чата",
+  "d03.note": "Дословно из записи демо; серым — перевод.",
+  "d04.h2": "Четыре свойства, которых не даст обычный промпт",
+  "d04.r1t": "Он помнит один магазин",
+  "d04.r1d": "Перед действием он читает живой каталог и свои опубликованные статьи. Правила магазина лежат в его рабочих файлах — например, <b>Chinese and English listings and articles must contain no Cyrillic characters</b>. Знания накапливаются по магазину: второй магазин — это обучение агента второму магазину, <b>а не другая сборка софта</b>.",
+  "d04.r2t": "Он переписывает свою же инструкцию",
+  "d04.r2d": "Закончив работу — <b>без всякой просьбы</b> — он разбирает, что только что сделал, и правит собственный файл процедур. Одну и ту же ошибку не должно приходиться объяснять дважды.",
+  "d04.r3t": "Подтверждение по умолчанию",
+  "d04.r3d": "Публикация, создание и правка сначала останавливаются на вопросе. Всё, в чём агент не уверен, помечается как <i>«ваше решение»</i> — и никогда не меняется молча за спиной владельца.",
+  "d04.r4t": "Он говорит, где заканчиваются его знания",
+  "d04.r4d": "Когда его спрашивают о компании, он начинает с <i>«Я не вижу ваши финансы, команду и мощности»</i> — и отвечает только по тому, что может прочитать. <b>Он отказывается выдумывать цифры.</b>",
+  "d05.h2": "Доступен на <em>тех платформах, которыми вы уже пользуетесь</em>",
+  "d05.sub": "Магазином управляют из мессенджера — начиная с Telegram, а за другими крупными мессенджерами стоит то же ядро агента.",
+  "d05.r1t": "Он приходит туда, где владелец уже есть",
+  "d05.r1d": "Сегодня это Telegram — где российский продавец и так проводит весь день. То же ядро агента подключается к <b>другим крупным мессенджерам</b>, так что магазином можно управлять оттуда, где владелец и команда реально находятся: один агент, много входов.",
+  "d05.r2t": "Ничего не нужно внедрять и осваивать",
+  "d05.r2d": "Вы пишете запрос обычными словами — и работа делается. <b>Ни нового приложения, ни админки, в которой нужно сидеть</b>: у владельцев, для которых это сделано, нет маркетинговой команды, но каждый из них уже пишет сообщения с телефона.",
+  "d05.r3t": "Работает без вас, когда вы этого хотите",
+  "d05.r3d": "В демо показан режим подтверждения — каждая публикация ждёт «да/нет». Снимите барьер, и те же сценарии <b>публикуют без участия человека</b>, а планировщик агента запускает их по таймеру. <b>Оба режима уже встроены.</b>",
+  "d05.out": "Вы говорите о деле — <i>«старые товары уже не тянут»</i> — а остальное делает агент.",
+  "d06.chap": "Результаты · 4:54, один дубль",
+  "d06.h2": "Шесть запросов — шесть реальных результатов",
+  "d06.sub": "Набраны в одном чате, в этом порядке, одним дублем без монтажа. Каждый результат ниже агент <b>сам проверил на живом сайте</b>.",
+  "d06.t1": "Написал и опубликовал статью<br><span>сначала проверив свои посты на пересечения</span>",
+  "d06.t2": "Создал товар, которого не хватало в каталоге<br><span>упаковочной бумаги нет вообще</span>",
+  "d06.t3": "Провёл аудит каталога и доложил вместо правок<br><span>«и то и другое — ваше решение»</span>",
+  "d06.t4": "Переписал две карточки по просьбе<br><span>фиксированная структура из пяти разделов</span>",
+  "d06.t5": "Перевёл обе на английский<br><span>сначала предупредил о смешанном каталоге</span>",
+  "d06.t6": "Провёл аудит сайта и бизнеса<br><span>только чтение, код не тронут</span>",
+  "d06.l1": "Публикация контента",
+  "d06.l2": "Управление каталогом",
+  "d06.l3": "Аудит качества",
+  "d06.l4": "Копирайтинг",
+  "d06.l5": "Локализация",
+  "d06.l6": "Диагностика сайта и бизнеса",
+  "d07.chap": "Результаты · статус",
+  "d07.h2": "Уже сегодня работает на <em>живом коммерческом сайте</em>",
+  "d07.f1": "Сегодня работают два сценария: <b>сбор, написание и публикация новостей</b> (китайские и российские источники) и <b>исследование конкурентов → создание и оптимизация товаров</b>. Оба действуют через собственные админ-API сайта.",
+  "d07.f2": "Оба работают в <b>двух режимах</b>: с подтверждением, который показан в демо, и полностью без участия человека, когда публикация уходит в прод без шага подтверждения, а планировщик агента запускает её по таймеру.",
+  "d07.f3": "Пилот — это <b>один реальный завод</b>: обычное небольшое производство, которое работает как обычно, пока агент работает на его живом сайте.",
+  "d07.f4": "<b>Что пока не сделано:</b> коммерческой выручки пока нет, второй магазин не подключён, а сценарий клиентской поддержки запланирован, но не сделан.",
+  "d07.f5": "Всё, что здесь заявлено, видно в <b>записи на 4:54</b>: видео — это доказательство, а презентация — лишь краткое изложение.",
+  "d08.chap": "Что дальше",
+  "d08.h2": "Тот же движок — <em>следующие бэкенды</em>",
+  "d08.l1lb": "Ядро · open source (MIT)",
+  "d08.l1tx": "Построено на <b>зрелой open-source архитектуре агентов под лицензией MIT</b>. Продукт сразу получает возможности, на которые иначе ушли бы месяцы: долговременная память, саморедактируемые процедуры, права доступа к инструментам, запуск по расписанию. <b>Вся инженерия уходит в слой, специфичный для магазина.</b>",
+  "d08.l2lb": "Продукт",
+  "d08.l2tx": "Поверх ядра мы строим слой, специфичный для магазина: его знания и правила, сценарии работы с контентом и каталогом, рабочие процедуры и интеграции с API, которые позволяют агенту действовать в реальном магазине, а не говорить о нём.",
+  "d08.l3lb": "Что дальше",
+  "d08.l3tx": "<b>Под магазин, а не под отрасль.</b> Подключение нескольких магазинов, сценарий клиентской поддержки и тот же движок, направленный на API продавцов маркетплейсов и готовые витрины: другой бэкенд, а не другой продукт.",
+  "d08.ctak": "Живое демо и видео 4:54"
+};
+
+  var I18N_KEY = 'mindshop-lang';
+  var langNodes = [].slice.call(document.querySelectorAll('[data-i18n]'));
+  var EN = {};
+  [].forEach.call(langNodes, function(el){
+    var attr = el.getAttribute('data-i18n-attr');
+    EN[el.getAttribute('data-i18n')] = attr ? el.getAttribute(attr) : el.innerHTML;
+  });
+  function langStore(v){
+    try{
+      if (v === undefined) { return localStorage.getItem(I18N_KEY); }
+      localStorage.setItem(I18N_KEY, v);
+    }catch(e){ return null; }
+  }
+  function langFromUrl(){
+    var m = /[?&]lang=([^&]*)/.exec(location.search);
+    var v = m ? decodeURIComponent(m[1]) : null;
+    return (v === 'ru' || v === 'en') ? v : null;
+  }
+  var langEl = document.querySelector('.lang');
+  var liveLink = document.querySelector('a[data-live]');
+  function applyLang(lang){
+    lang = (lang === 'ru') ? 'ru' : 'en';
+    document.documentElement.lang = lang;
+    [].forEach.call(langNodes, function(el){
+      var key = el.getAttribute('data-i18n');
+      var val = (lang === 'ru' && RU[key] !== undefined) ? RU[key] : EN[key];
+      if (val === undefined) { return; }
+      var attr = el.getAttribute('data-i18n-attr');
+      if (attr) { el.setAttribute(attr, val); } else { el.innerHTML = val; }
+    });
+    [].forEach.call(document.querySelectorAll('[data-setlang]'), function(b){
+      b.setAttribute('aria-pressed', b.getAttribute('data-setlang') === lang ? 'true' : 'false');
+    });
+    if (liveLink) {
+      liveLink.setAttribute('href', liveLink.getAttribute('data-live') + (lang === 'ru' ? '?lang=ru' : ''));
+    }
+    langStore(lang);
+  }
+  [].forEach.call(document.querySelectorAll('[data-setlang]'), function(b){
+    b.addEventListener('click', function(){ applyLang(b.getAttribute('data-setlang')); });
+  });
+  applyLang(langFromUrl() || langStore() || 'en');
+
   function fit(){
-    document.documentElement.style.zoom = Math.min(1, (window.innerWidth - 28) / 1280);
+    var z = Math.min(1, (window.innerWidth - 28) / 1280);
+    document.documentElement.style.zoom = z;
+    if (langEl) { langEl.style.transform = 'scale(' + (1 / z) + ')'; }
   }
   window.addEventListener('resize', fit);
-  window.addEventListener('beforeprint', function(){ document.documentElement.style.zoom = 1; });
+  window.addEventListener('beforeprint', function(){ document.documentElement.style.zoom = 1; if (langEl) { langEl.style.transform = ''; } });
   window.addEventListener('afterprint', fit);
   fit();
 

@@ -3,6 +3,9 @@
 Thumbs.db
 desktop.ini
 
+# IDE
+.idea/
+
 # 未压缩原片：仅本地留档，不进仓库
 video_final.mp4
 video_final-original.mp4

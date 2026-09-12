@@ -13,6 +13,21 @@
 | `video_final.srt` | 字幕文本（备用，页面不引用） |
 | `.nojekyll` | 关闭 GitHub Pages 的 Jekyll 处理，原样发布静态文件 |
 
+## 语言切换（EN / RU）
+
+两个页面右上角各有 `RU | EN` 切换控件（deck 上是固定悬浮，且在打印/导出 PDF 时自动隐藏）。
+
+- **默认英语**：首次打开一律英语，不做浏览器语言识别。
+- **`?lang=ru` / `?lang=en`**：URL 参数优先级最高。发给俄语评委就直接用
+  `https://waterymonkey3.github.io/mindshop-ai/?lang=ru`。
+- **记住选择**：手动切换后写入 `localStorage["mindshop-lang"]`，下次打开保持；
+  页面之间会传递（index 的 deck 链接、deck 的 live demo 链接都会带上 `?lang=ru`）。
+- **改文案**：在 HTML 里给元素加 `data-i18n="键名"`，再到该页 `<script>` 的 `RU` 字典里加同名键的俄语文本。
+  英文原文不需单独维护：脚本首次加载时从 HTML 快照，所以切回英语与改动前逐字一致。
+- 不翻译的内容：品牌 `MindShop AI`、`@WatertMonkey`、邮箱、URL、编号与时间戳、
+  `index.html` 里的 `<code>` 配置引文，以及视频里已烧录的字幕。
+- `deck.html` 第 03 张的聊天窗口保留英文原话，下方用细线隔开加一行灰字俄语译文。
+
 ## 本地预览
 
 ```powershell
