@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f4ed">
+<title>MindShop AI — an AI store manager for online shops</title>
+<meta name="description" content="MindShop AI is an AI store manager for e-commerce sites: an agent that learns one shop and runs its content, catalogue and audits through the site's own APIs.">
+<style>
+  :root{
+    --paper:#f5f4ed;      /* 主底：暖纸色（Claude 式 parchment） */
+    --ivory:#faf9f5;      /* 卡片 / 浅区块 */
+    --ink:#141413;        /* 主文字：暖近黑，不是纯黑 */
+    --body:#5e5d59;       /* 正文 */
+    --mut:#87867f;        /* 次要 */
+    --line:#e8e6dc;       /* 边框 */
+    --line2:#f0eee6;      /* 更浅的边框 */
+    --terra:#c96442;      /* 品牌赤陶 —— 只给主 CTA 和最重要的强调 */
+    --coral:#d97757;      /* 深色底上的浅赤陶 */
+    --dark:#141413;
+    --dark2:#30302e;
+    --sand:#e8e6dc;
+    --serif:Georgia,"Iowan Old Style","Palatino Linotype","Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+    --mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:76px;-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--body);
+       font:16.5px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 26px}
+
+  /* ---------- sticky nav ---------- */
+  .nav{position:sticky;top:0;z-index:60;background:rgba(245,244,237,.88);
+       -webkit-backdrop-filter:saturate(150%) blur(12px);backdrop-filter:saturate(150%) blur(12px);
+       border-bottom:1px solid var(--line)}
+  .nav-in{max-width:1120px;margin:0 auto;padding:13px 26px;display:flex;align-items:center;gap:26px}
+  .brand{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;
+         color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+  .brand:before{content:"";width:9px;height:9px;border-radius:3px;background:var(--terra);flex:0 0 auto}
+  .nav-links{margin-left:auto;display:flex;gap:24px;align-items:center}
+  .nav-links a{font-size:14.5px;color:var(--body);text-decoration:none}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-cta{display:inline-block;background:var(--ink);color:#faf9f5;text-decoration:none;font-size:13.5px;
+           font-weight:600;padding:8px 14px;border-radius:9px}
+  .nav-cta:hover{background:var(--terra)}
+  @media(max-width:720px){.nav-links a{display:none}}
+
+  /* ---------- bands（区块明暗交替，制造章节感） ---------- */
+  .band{padding:86px 0}
+  .band.tint{background:var(--ivory);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .band.dark{background:var(--dark);color:#b0aea5}
+  .band.dark h2{color:#faf9f5}
+  .band.dark .cap{color:#87867f}
+
+  /* ---------- hero ---------- */
+  .hero{padding:76px 0 30px}
+  .kicker{letter-spacing:.16em;text-transform:uppercase;font-size:11.5px;font-weight:600;
+          color:var(--terra);margin-bottom:20px}
+  h1{font-family:var(--serif);font-weight:400;font-size:58px;line-height:1.08;letter-spacing:-.015em;
+     color:var(--ink);margin:0 0 20px}
+  .lead{font-size:19.5px;line-height:1.68;color:var(--body);margin:0 0 28px;max-width:820px}
+  .lead b{color:var(--ink);font-weight:600}
+  .badges{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:32px}
+  .badge{border:1px solid var(--line);background:var(--ivory);color:var(--mut);
+         padding:6px 12px;border-radius:999px;font-size:13px;
+         box-shadow:0 0 0 1px rgba(20,20,19,.02)}
+  .badge b{color:var(--ink);font-weight:600}
+  .btn{display:inline-block;background:var(--terra);border:1px solid var(--terra);color:#fff;
+       text-decoration:none;padding:13px 22px;border-radius:11px;font-size:15px;font-weight:600;
+       transition:.16s;box-shadow:0 1px 2px rgba(20,20,19,.10)}
+  .btn:hover{background:#b4553a;border-color:#b4553a}
+
+  /* ---------- headings / text ---------- */
+  h2{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1.22;letter-spacing:-.012em;
+     color:var(--ink);margin:0 0 22px}
+  .band h2:not(:first-child){margin-top:62px}
+  .cap{font-size:14px;color:var(--mut);margin:14px 0 0;line-height:1.6}
+
+  video{width:100%;border-radius:18px;border:1px solid var(--dark2);background:#101010;display:block;
+        box-shadow:0 18px 50px rgba(0,0,0,.35)}
+
+  /* ---------- stats（真实数字速览） ---------- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--dark2);
+         border:1px solid var(--dark2);border-radius:16px;overflow:hidden;margin-top:34px}
+  .stat{background:#1c1c1a;padding:24px 22px}
+  .stat .v{font-family:var(--serif);font-size:31px;line-height:1.1;color:var(--coral);
+           font-variant-numeric:tabular-nums}
+  .stat .k{font-size:13px;color:#8f8e86;margin-top:9px;line-height:1.5}
+  @media(max-width:860px){.stats{grid-template-columns:1fr 1fr}}
+
+  /* ---------- lists ---------- */
+  ul.ev{margin:6px 0 0;padding-left:0;list-style:none;font-size:15.5px}
+  ul.ev li{margin:0;padding:15px 0 15px 26px;position:relative;border-bottom:1px solid var(--line)}
+  ul.ev li:first-child{border-top:1px solid var(--line)}
+  ul.ev li:before{content:"";position:absolute;left:4px;top:24px;width:6px;height:6px;border-radius:50%;
+                  background:var(--terra)}
+  ul.ev b{color:var(--ink);font-weight:600}
+  ul.ev i{color:var(--ink);font-style:italic;border-bottom:1px solid rgba(201,100,66,.32)}
+  .band.dark ul.ev{color:#b0aea5}
+  .band.dark ul.ev li{border-color:var(--dark2)}
+  .band.dark ul.ev b{color:#faf9f5}
+
+  ol.steps{margin:6px 0 0;padding-left:0;list-style:none;counter-reset:s;font-size:15.5px}
+  ol.steps li{counter-increment:s;margin:0;padding:18px 0 18px 50px;position:relative;
+              border-bottom:1px solid var(--line)}
+  ol.steps li:first-child{border-top:1px solid var(--line)}
+  ol.steps li:before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:19px;
+                     font-family:var(--mono);font-size:12px;font-weight:700;color:var(--terra);
+                     letter-spacing:.06em}
+  ol.steps b{color:var(--ink);font-weight:600}
+  .num{color:var(--terra);font-weight:700;font-variant-numeric:tabular-nums}
+
+  /* ---------- agent panel ---------- */
+  .agent{background:var(--ivory);border:1px solid var(--line);border-radius:20px;padding:6px 32px 20px;
+         box-shadow:0 0 0 1px rgba(20,20,19,.015),0 6px 28px rgba(0,0,0,.045)}
+  .agent h3{margin:26px 0 9px;padding-top:26px;border-top:1px solid var(--line);
+            font-size:17.5px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+  .agent h3:first-child{margin-top:16px;padding-top:4px;border-top:0}
+  .agent p{margin:0 0 4px;font-size:15.5px;line-height:1.66}
+  .agent code{background:var(--paper);border:1px solid var(--line);padding:2px 7px;border-radius:6px;
+              font-size:13px;color:var(--ink);font-family:var(--mono)}
+
+  /* ---------- cards ---------- */
+  .grid{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:780px){.grid{grid-template-columns:1fr 1fr 1fr}}
+  .card{background:var(--ivory);border:1px solid var(--line);border-radius:16px;padding:26px 24px;
+        box-shadow:0 0 0 1px rgba(20,20,19,.015),0 4px 22px rgba(0,0,0,.04)}
+  .card .n{font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--terra);
+           letter-spacing:.08em;margin-bottom:12px}
+  .card h3{margin:0 0 9px;font-size:17px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+  .card p{margin:0;color:var(--mut);font-size:14.5px;line-height:1.62}
+
+  /* ---------- footer ---------- */
+  .foot{background:var(--dark);color:#8f8e86;padding:60px 0 44px;font-size:13.5px;line-height:1.7}
+  .foot-in{max-width:1120px;margin:0 auto;padding:0 26px;display:grid;gap:26px;
+           grid-template-columns:1.4fr 1fr}
+  @media(max-width:720px){.foot-in{grid-template-columns:1fr}}
+  .foot .fbrand{font-family:var(--serif);font-size:22px;color:#faf9f5}
+  .foot b{color:#d8d6cd;font-weight:600}
+  .foot .fl a{color:var(--coral);text-decoration:none}
+
+  a{color:var(--terra)}
+  code{background:var(--paper);border:1px solid var(--line);padding:2px 6px;border-radius:6px;font-size:13px}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top"><span class="pname">MindShop AI</span></a>
+    <div class="nav-links">
+      <a href="#demo">Demo</a>
+      <a href="#how">How it works</a>
+      <a href="#agent">Capabilities</a>
+      <a href="#status">Status</a>
+      <a href="#contact">Contact</a>
+      <a class="nav-cta" href="deck.html">Project deck &rarr;</a>
+    </div>
+  </div>
+</nav>
+
+<div id="top"></div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">ITMO Accelerator — Fall 2026</div>
+    <h1><span class="pname">MindShop AI</span><br>an AI store manager<br>for online shops</h1>
+    <p class="lead">A shop owner knows the product, not online marketing. <span class="pname">MindShop AI</span>
+       is an <b>AI agent the owner talks to</b> — a chat window instead of a dashboard, plain language
+       instead of forms. Nothing to install, nothing to learn. It learns
+       <b>one specific shop</b>: its live catalogue, its rules, its own publishing history. Then it does the
+       work through the shop's real APIs — writes and publishes content, creates the products the catalogue is
+       missing, rewrites weak listings, translates them, audits the site and advises on the business.
+       It is built for <b>e-commerce sites, not for one industry</b> — the pilot happens to be a manufacturer —
+       and the same engine is meant for marketplace and storefront platforms next. Nothing goes live without
+       the owner's word in the default mode, and every result is read back from the live site.</p>
+    <div class="badges">
+      <span class="badge">Working prototype <b>running in production</b></span>
+      <span class="badge">Pilot: <b>a real manufacturing shop</b></span>
+      <span class="badge">Agent core: <b>persistent memory + self-editing procedures</b></span>
+      <span class="badge">Approval mode <b>and full-auto + scheduled runs</b></span>
+      <span class="badge">Zero learning curve: <b>chat, not a dashboard</b></span>
+    </div>
+    <p><a class="btn" href="deck.html">Project deck — the 8-slide version &rarr;</a></p>
+  </div>
+</header>
+
+<section class="band dark" id="demo">
+  <div class="wrap">
+    <h2>Demo — 4:54, one take</h2>
+    <!-- video_final-web.mp4 = 网页压缩版（原片 video_final.mp4 留档）。英/俄字幕已烧进画面。 -->
+    <video controls preload="metadata" poster="poster.jpg" playsinline>
+      <source src="video_final-web.mp4" type="video/mp4">
+      Your browser does not support the video tag. Direct link: <a href="video_final-web.mp4">video_final-web.mp4</a>
+    </video>
+    <p class="cap">Six requests typed into one chat, in the order they happened. The agent calls the pilot
+       store's own admin APIs — one for content publishing, one for product management — and reads every
+       result back from the live site, so the counts you see are real.</p>
+
+  </div>
+</section>
+
+<section class="band" id="how">
+  <div class="wrap">
+    <h2>Using it is just talking</h2>
+    <ul class="ev">
+      <li><b>It reaches you on the platforms you already use.</b> Telegram today — where a Russian seller
+          already spends the day — and the same agent core plugs into the other major messaging platforms, so
+          the shop can be run from wherever the owner and the team actually are, on whatever device is at
+          hand.</li>
+      <li><b>Nothing to adopt, nothing to learn.</b> You type a request in plain language and the work gets
+          done. There is no new app to install and no admin panel to sit through — the owners this is built
+          for have no marketing team, but every one of them already types messages on a phone.</li>
+      <li><b>The owner speaks business, the agent does the rest.</b> You say <i>"those older products aren't
+          good enough"</i> — it reads the catalogue, audits it, reports what it found, and does what you approve.
+          No settings screen, no fields to fill in, no training to sit through.</li>
+    </ul>
+
+    <h2>What it actually did, request by request</h2>
+    <ol class="steps">
+      <li><b>Wrote and published an industry article.</b> It drafted the piece from Russian marketplace
+          sources, then <b>checked its own published articles for overlap first</b> — <i>"Checked against your
+          live articles: no overlap."</i> — and stopped to ask permission before publishing. On approval it
+          published through the API and verified on the live site: news total is now 7.</li>
+      <li><b>Created a product the catalogue was missing.</b> It read the live catalogue first
+          (nine products), found a real gap — <b>no packaging paper at all</b> — and
+          proposed one product: category, price, MOQ, specifications and a photo it had verified loads on the
+          site. It then waited for an answer. After <i>"Create it!"</i>: id 14, and
+          product total is now 10.</li>
+      <li><b>Audited the rest of the catalogue — and stopped at the line it would not cross.</b> Told that the
+          older products were not good enough, it checked them one by one and <b>reported instead of
+          editing</b>: repeated specifications on six products, and names that read like a category rather than
+          a product. <i>"Both are your call."</i></li>
+      <li><b>Rewrote two listings once the owner pointed at them.</b> On <i>"write 8 and 9"</i> it brought two
+          thin descriptions back — 16 → 444 and 20 → 404
+          characters — in a fixed five-section structure, and verified both on the live site.</li>
+      <li><b>Translated the same two products into English — and warned first.</b> It wrote the English version
+          and flagged the consequence <b>before</b> touching the site: <i>"your catalogue would then be
+          part-Chinese, part-English."</i> Then it replaced both and checked them live.</li>
+      <li><b>Audited the website and the business — read-only.</b> Asked for advice, it ran an audit that
+          <b>does not touch the code</b> and answered from the site's own weak points instead of generic
+          advice: the sitemap covers three URLs out of twenty, and search engines
+          can't see the product pages. It also named the search engine that matters here: <i>"Google sometimes
+          executes JavaScript. Yandex doesn't — and Yandex is your market."</i> Then, at company level, it
+          opened with what it cannot see, and named the wedge it would bet on: <b>FBS and marking
+          compliance</b>.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="band tint" id="agent">
+  <div class="wrap">
+    <h2>Why this is an agent, not a writing tool</h2>
+    <div class="agent">
+      <h3>It remembers one shop — and only that shop</h3>
+      <p>Before acting it reads the shop's live catalogue and its own published articles, so decisions are
+         grounded in this business rather than in generic best practice. The shop's own rules live in the
+         agent's working files — for example <code>Chinese and English listings and articles must contain no
+         Cyrillic characters</code>. This knowledge is accumulated <b>per shop</b>: a second shop means
+         teaching it a second shop, not shipping different software.</p>
+
+      <h3>It rewrites its own playbook</h3>
+      <p>After finishing the work — <b>without being asked</b> — it reviews what it just did and patches its own
+         procedure file, which is visible in the demo. The same mistake should not have to be explained
+         twice.</p>
+
+      <h3>Permission gates, on by default</h3>
+      <p>Out of the box, publishing, creating and rewriting stop at a question first; that is the mode you see
+         in the demo, and what it is unsure about is reported as <i>“your call”</i>. The same workflows also
+         run <b>unattended</b>: once the owner trusts the pattern, generation goes live with no approval step,
+         and the agent's scheduler triggers the workflows on a timer — the shop owner does nothing at all.</p>
+
+      <h3>It says where its knowledge stops</h3>
+      <p>Asked for advice on the company, it opens by stating what it <b>cannot</b> see — <i>"I can't see your
+         finances, team or capacity"</i> — and answers only from what it can actually read. It refuses to invent
+         numbers. Where mistakes cost real orders, that restraint matters more than raw speed.</p>
+
+      <h3>What it is built on</h3>
+      <p><span class="pname">MindShop AI</span> is built on a <b>mature, MIT-licensed open-source agent
+         architecture</b>. That gives the product, from day one, capabilities that would otherwise take months
+         to build — persistent memory across sessions, self-editing procedures, tool permissions, scheduled
+         runs. <b>What we build — and where all the engineering goes — is the layer specific to the shop: its
+         knowledge, its rules, its workflows.</b></p>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="status">
+  <div class="wrap">
+    <h2>The problem we are solving</h2>
+    <div class="grid">
+      <div class="card"><div class="n">01</div><h3>Agencies cost too much</h3>
+        <p>At small-merchant scale, outsourcing content and SEO does not pay back.</p></div>
+      <div class="card"><div class="n">02</div><h3>Generic AI writes generic text</h3>
+        <p>Tools like Jasper or Copy.ai produce plausible copy that knows nothing about the business.</p></div>
+      <div class="card"><div class="n">03</div><h3>Dashboards report, they don't act</h3>
+        <p>Marketplace analytics show data and leave every task to the owner.</p></div>
+    </div>
+
+    <h2>Where we are</h2>
+    <ul class="ev">
+      <li>Two workflows run on the live pilot store today: <b>automated collection, writing and publication of
+          industry news</b> (Chinese and Russian sources), and <b>competitor product research → product
+          creation and optimisation</b>. Both act through the site's admin APIs.</li>
+      <li><b>Approval mode and full-auto are both built.</b> The demo shows the approval mode, because that is
+          the behaviour a shop owner has to be able to trust first. With the gate switched off, the same
+          workflows publish with no human in the loop, and the agent's scheduler then triggers them on a timer
+          — both modes are available today, and switching between them is a setting.</li>
+      <li><b>The engine is shop-agnostic.</b> It works on a live site through its APIs, so the next targets are
+          marketplace seller APIs and hosted storefront platforms — the same engine pointed at a different
+          backend, not a different product. Multi-shop onboarding and the customer-service workflow (answering
+          buyers from the same knowledge base) are still ahead of us.</li>
+      <li>No commercial revenue yet. Everything described above runs today on a live commercial site — the
+          accelerator is the step that turns it into a business.</li>
+    </ul>
+  </div>
+</section>
+
+<footer class="foot" id="contact">
+  <div class="foot-in">
+    <div>
+      <div class="fbrand"><span class="pname">MindShop AI</span></div>
+      <p style="margin:10px 0 0;max-width:420px">An AI store manager for e-commerce sites — an agent that learns
+         one shop and runs its content, catalogue and audits through the site's own APIs.</p>
+    </div>
+    <div class="fl">
+      Founder: <b>Yu Pengju</b> — solo. MSc Computer Science student at ITMO University (started September
+      2026); BSc Computer Science, Hangzhou Dianzi University; one year building MVPs at a cross-border SaaS
+      company; family manufacturing background.<br>
+      <span class="pname">MindShop AI</span> · <span id="yr"></span><br>
+        Telegram <a href="https://t.me/WatertMonkey" target="_blank" rel="noopener">@WatertMonkey</a> &nbsp;·&nbsp;
+        Email <a href="mailto:864200476@qq.com">864200476@qq.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ===== 只改这一行：项目名（定下来后整页同步） ===== */
+  const PROJECT_NAME = "MindShop AI";
+
+  document.querySelectorAll(".pname").forEach(el => el.textContent = PROJECT_NAME);
+  document.title = PROJECT_NAME + " — an AI store manager for online shops";
+  document.getElementById("yr").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

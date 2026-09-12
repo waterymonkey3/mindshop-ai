@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MindShop AI — Project deck (editorial / report variant)</title>
+<style>
+  :root{
+    --paper:#fcfcfb; --alt:#f7f8f5;
+    --ink:#12140f; --body:#3c4038; --mut:#6f756c; --dim:#969b91;
+    --line:#e5e7e1; --line2:#d3d7ce;
+    --acc:#0d5c4f; --accsoft:#eaf3f0; --amber:#8f5f1a;
+    --serif:Georgia,"Iowan Old Style","Palatino Linotype","Book Antiqua",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+    --mono:ui-monospace,"SF Mono",SFMono-Regular,Consolas,Menlo,monospace;
+  }
+  @page{ size:1280px 720px; margin:0; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:#e9eae5}
+  body{font-family:var(--sans);color:var(--body);background:#e9eae5;
+       -webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+  /* ---------- frame ---------- */
+  .s{width:1280px;height:720px;margin:0 auto 26px;position:relative;overflow:hidden;background:var(--paper);
+     display:flex;flex-direction:column;padding:44px 66px 0;box-shadow:0 1px 5px rgba(18,20,15,.10)}
+  .s.alt{background:var(--alt)}
+  .s.deep{background:var(--acc)}
+  /* 版式母题：右上角一枚极淡的大号衬线章节数字 */
+  .s:after{position:absolute;right:52px;top:30px;font-family:var(--serif);font-size:108px;line-height:1;
+           color:#eceee7;pointer-events:none;z-index:0}
+  .n02:after{content:"02"} .n03:after{content:"03"} .n04:after{content:"04"} .n05:after{content:"05"}
+  .n06:after{content:"06"} .n07:after{content:"07"} .n08:after{content:"08"}
+  .s.deep:after{color:rgba(255,255,255,.10)}
+
+  .hd{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:14px;
+      border-bottom:1px solid var(--line2);font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;
+      text-transform:uppercase;color:var(--dim);position:relative;z-index:1}
+  .hd .brand{color:var(--ink);font-weight:600}
+  .hd .chap{color:var(--acc)}
+  .bd{flex:1;padding:26px 0 0;min-height:0;position:relative;z-index:1}
+  .ft{position:absolute;left:66px;right:66px;bottom:0;height:52px;display:flex;z-index:2;
+      justify-content:space-between;align-items:center;border-top:1px solid var(--line2);
+      font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+  .ft .pg{color:var(--acc);font-weight:600}
+  .s.deep .hd{border-color:rgba(255,255,255,.22);color:rgba(255,255,255,.58)}
+  .s.deep .hd .brand{color:#fff}
+  .s.deep .hd .chap{color:#a8d8cc}
+  .s.deep .ft{border-color:rgba(255,255,255,.22);color:rgba(255,255,255,.58)}
+  .s.deep .ft .pg{color:#a8d8cc}
+
+  /* ---------- type: 衬线给权威，等宽给精确，无衬线给可读 ---------- */
+  h1{font-family:var(--serif);font-weight:400;font-size:66px;line-height:1.05;letter-spacing:-.02em;color:var(--ink)}
+  h2{font-family:var(--serif);font-weight:400;font-size:36px;line-height:1.2;letter-spacing:-.014em;
+     color:var(--ink);max-width:1000px}
+  h2 em{font-style:italic;color:var(--acc)}
+  .sub{font-size:17px;line-height:1.56;color:var(--mut);margin-top:12px;max-width:940px}
+  .sub b{color:var(--ink);font-weight:600}
+  .s.deep h2{color:#fff}
+  .s.deep h2 em{color:#a8d8cc}
+  .s.deep .sub{color:rgba(255,255,255,.76)}
+  .s.deep .sub b{color:#fff}
+
+  /* ---------- rows ---------- */
+  .rows{margin-top:18px;border-top:1.5px solid var(--ink)}
+  .row{display:grid;grid-template-columns:56px 296px 1fr;gap:26px;align-items:start;
+       padding:14px 0;border-bottom:1px solid var(--line)}
+  .row .no{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--acc);letter-spacing:.08em;
+           padding-top:5px}
+  .row .t{font-family:var(--serif);font-size:18.5px;line-height:1.3;color:var(--ink)}
+  .row .d{font-size:15.5px;line-height:1.56;color:var(--body)}
+  .row .d b{color:var(--ink);font-weight:600}
+  .row .d i{font-style:italic;color:#2f3a34}
+  .kicker-out{margin-top:22px;font-size:17.5px;line-height:1.5;color:var(--body)}
+  .kicker-out b{color:var(--ink)}
+
+  /* ---------- product page ---------- */
+  .split{display:grid;grid-template-columns:1fr 476px;gap:52px;margin-top:22px}
+  .pts{border-top:1.5px solid var(--ink)}
+  .pt{padding:15px 0;border-bottom:1px solid var(--line);font-size:16px;line-height:1.52;color:var(--body)}
+  .pt b{color:var(--ink);font-weight:600}
+  .win{background:#fff;border:1px solid var(--line2);border-radius:3px;overflow:hidden}
+  .win .bar{display:flex;align-items:center;gap:8px;padding:11px 15px;border-bottom:1px solid var(--line);
+            background:#fafbf9;font-family:var(--mono);font-size:11px;color:var(--mut);letter-spacing:.04em}
+  .win .dot{width:6px;height:6px;border-radius:50%;background:var(--acc);flex:0 0 auto}
+  .win .msgs{padding:16px 15px 17px;display:flex;flex-direction:column;gap:9px}
+  .m{max-width:88%;padding:9px 13px;border-radius:3px;font-size:14.5px;line-height:1.45}
+  .m.me{align-self:flex-end;background:var(--acc);color:#fff}
+  .m.ai{align-self:flex-start;background:#f5f7f4;border:1px solid var(--line);color:var(--body)}
+  .m.ai b{color:var(--acc);font-weight:600}
+  .note{padding:11px 2px 0;font-family:var(--mono);font-size:10.5px;color:var(--dim);letter-spacing:.04em}
+
+  /* ---------- timeline ---------- */
+  .tl{margin-top:14px;border-top:1.5px solid var(--ink)}
+  .tl .li{display:grid;grid-template-columns:70px 1fr 292px;gap:22px;align-items:start;
+          padding:10px 0;border-bottom:1px solid var(--line)}
+  .tl .tc{font-family:var(--mono);font-size:11.5px;color:var(--dim);font-variant-numeric:tabular-nums}
+  .tl .tk{font-family:var(--serif);font-size:16px;line-height:1.3;color:var(--ink)}
+  .tl .tk span{font-family:var(--sans);font-size:14.5px;color:var(--mut)}
+  .tl .tv{font-family:var(--mono);font-size:11px;color:var(--dim);text-align:right;letter-spacing:.03em;font-weight:400}
+  
+
+  /* ---------- stack ---------- */
+  .stack{margin-top:16px;border-top:1.5px solid var(--ink)}
+  .layer{display:grid;grid-template-columns:186px 1fr;gap:26px;align-items:center;
+         padding:14px 0;border-bottom:1px solid var(--line)}
+  .layer .lb{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.11em;
+             text-transform:uppercase;color:var(--acc)}
+  .layer .tx{font-size:15.5px;line-height:1.54;color:var(--body)}
+  .layer .tx b{color:var(--ink);font-weight:600}
+  .layer.l2 .lb{color:var(--amber)}
+  .layer.l3 .lb{color:var(--dim)}
+
+  /* ---------- facts ---------- */
+  .facts{list-style:none;border-top:1.5px solid #fff;margin-top:16px}
+  .facts li{display:grid;grid-template-columns:24px 1fr;gap:16px;padding:13px 0;
+            border-bottom:1px solid rgba(255,255,255,.2);font-size:16px;line-height:1.54;
+            color:rgba(255,255,255,.82)}
+  .facts li:before{content:"—";color:#a8d8cc;font-weight:700}
+  .facts li b{color:#fff;font-weight:600}
+  .cta{margin-top:22px;border:1px solid var(--line2);border-radius:3px;padding:15px 20px;
+       display:flex;justify-content:space-between;align-items:center;gap:24px;background:#fff}
+  .cta .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+          color:var(--dim);margin-bottom:5px}
+  .cta .v{font-size:14.5px;color:var(--body)}
+  .cta .v b{color:var(--ink)}
+  .cta .v a{color:var(--acc);text-decoration:none}
+  .cta .todo{color:var(--amber);font-weight:600}
+
+  /* ---------- cover ---------- */
+  .cover{background:
+      linear-gradient(180deg,var(--paper) 0%,#f8f9f6 100%)}
+  /* 封面铺一层极淡的稿纸横线，暗示"这是记录下来的东西" */
+  .cover:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+    background:repeating-linear-gradient(180deg,transparent 0 47px,#eef0ea 47px 48px);
+    opacity:.85}
+  .cover .bd{display:flex;flex-direction:column;justify-content:center;padding-top:0}
+  .cover .tagline{font-family:var(--serif);font-style:italic;font-size:27px;color:var(--acc);margin-top:14px}
+  .cover .rule{width:104px;height:5px;background:var(--acc);margin-top:28px}
+  .cover .lead{font-size:18.5px;line-height:1.6;color:var(--body);margin-top:24px;max-width:830px}
+  .cover .lead b{color:var(--ink);font-weight:600}
+  .cover .tags{margin-top:26px;display:flex;gap:22px;flex-wrap:wrap;
+               font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+               color:var(--dim)}
+  .cover .tags span{position:relative;padding-left:13px}
+  .cover .tags span:before{content:"";position:absolute;left:0;top:5px;width:5px;height:5px;background:var(--acc)}
+  .cover .who{margin-top:32px;font-size:15px;color:var(--mut)}
+  .cover .who b{color:var(--ink);font-weight:600}
+
+  @media print{
+    html{background:#fff;zoom:1 !important}
+    body{background:#fff}
+    .s{margin:0;box-shadow:none;break-after:page}
+    .s:last-child{break-after:auto}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ 01 · COVER ============ -->
+<section class="s cover">
+  <div class="hd"><span class="brand">MindShop AI</span><span class="chap">ITMO Accelerator · Fall 2026</span></div>
+  <div class="bd">
+    <h1>MindShop AI</h1>
+    <div class="tagline">An AI store manager for online shops</div>
+    <div class="rule"></div>
+    <p class="lead">You talk to it — and it runs the shop's <b>content, catalogue and audits</b> through the
+       site's own APIs. It learns one shop, does the work, asks before anything goes live, and reads every
+       result back from the live site.</p>
+    <div class="tags">
+      <span>Agent, not a writing tool</span>
+      <span>Persistent memory</span>
+      <span>Self-improving</span>
+      <span>API-driven</span>
+    </div>
+    <div class="who"><b>Yu Pengju</b> &nbsp;·&nbsp; MSc Computer Science, ITMO University &nbsp;·&nbsp; September 2026</div>
+  </div>
+  <div class="ft"><span>Project deck</span><span class="pg">01</span></div>
+</section>
+
+<!-- ============ 02 · BACKGROUND ============ -->
+<section class="s n02">
+  <div class="hd"><span class="brand">MindShop AI</span><span class="chap">Background</span></div>
+  <div class="bd">
+    <h2>A shop owner knows the product — <em>not online marketing</em></h2>
+    <p class="sub">Millions of small sellers on marketplaces and on their own sites can make the product.
+       Almost none of them can do the content, the catalogue work and the SEO — and none of them can hire
+       for it.</p>
+    <div class="rows">
+      <div class="row">
+        <div class="no">01</div>
+        <div class="t">Agencies cost too much</div>
+        <div class="d">At small-merchant scale, outsourcing content and SEO <b>does not pay back</b>. The
+           budget that would make it work is the budget a small shop does not have.</div>
+      </div>
+      <div class="row">
+        <div class="no">02</div>
+        <div class="t">Generic AI writes generic text</div>
+        <div class="d">Tools like Jasper or Copy.ai produce plausible copy that <b>knows nothing about the
+           business</b> — because they were never given the business.</div>
+      </div>
+      <div class="row">
+        <div class="no">03</div>
+        <div class="t">Dashboards report, they don't act</div>
+        <div class="d">Marketplace analytics show data and <b>leave every task to the owner</b>. Knowledge is
+           not the bottleneck; execution is.</div>
+      </div>
+    </div>
+    <p class="kicker-out">So good small shops stay invisible — while competitors with a marketing team win.</p>
+  </div>
+  <div class="ft"><span>ITMO Accelerator · Fall 2026</span><span class="pg">02</span></div>
+</section>
+
+<!-- ============ 03 · SOLUTION ============ -->
+<section class="s alt n03">
+  <div class="hd"><span class="brand">MindShop AI</span><span class="chap">Solution</span></div>
+  <div class="bd">
+    <h2>One chat window instead of a dashboard</h2>
+    <div class="split">
+      <div class="pts">
+        <div class="pt">An AI agent that <b>learns one shop</b> — its live catalogue, its rules, its own
+          publishing history.</div>
+        <div class="pt">It acts through the shop's <b>real APIs</b>, and the results land on the live site —
+          you can watch the counts change.</div>
+        <div class="pt">In the default mode, <b>nothing goes live</b> without the owner's word.</div>
+        <div class="pt">Every result is <b>read back from the live site</b>, so what it reports is what is
+          actually there.</div>
+      </div>
+      <div>
+        <div class="win">
+          <div class="bar"><span class="dot"></span>@MindShopBot — one chat window</div>
+          <div class="msgs">
+            <div class="m me">Hi! please help me write a news and upload to my website.</div>
+            <div class="m ai">Draft ready. Checked against your live articles: no overlap.
+              <b>Shall I publish it?</b></div>
+            <div class="m me">publish it.</div>
+            <div class="m ai">Published. <b>Verified on the live site — news total is now 7.</b></div>
+          </div>
+        </div>
+        <div class="note">Verbatim from the demo recording — not written for this deck.</div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>ITMO Accelerator · Fall 2026</span><span class="pg">03</span></div>
+</section>
+
+<!-- ============ 04 · SOLUTION: WHY AN AGENT ============ -->
+<section class="s n04">
+  <div class="hd"><span class="brand">MindShop AI</span><span class="chap">Solution</span></div>
+  <div class="bd">
+    <h2>Four behaviours a prompt cannot give you</h2>
+    <div class="rows" style="margin-top:22px">
+      <div class="row">
+        <div class="no">01</div>
+        <div class="t">It remembers one shop</div>
+        <div class="d">Before acting it reads the live catalogue and its own published articles. The shop's
+           rules live in its working files — e.g. <b>Chinese and English listings and articles must contain
+           no Cyrillic characters</b>. Knowledge accumulates per shop: a second shop means teaching it a
+           second shop, <b>not shipping different software</b>.</div>
+      </div>
+      <div class="row">
+        <div class="no">02</div>
+        <div class="t">It rewrites its own playbook</div>
+        <div class="d">After finishing the work — <b>unprompted</b> — it reviews what it just did and patches
+           its own procedure file. The same mistake should not have to be explained twice.</div>
+      </div>
+      <div class="row">
+        <div class="no">03</div>
+        <div class="t">Permission gates, by default</div>
+        <div class="d">Publishing, creating and rewriting stop at a question first. Anything it is unsure
+           about is reported as <i>"your call"</i> — never changed silently behind the owner's back.</div>
+      </div>
+      <div class="row">
+        <div class="no">04</div>
+        <div class="t">It says where its knowledge stops</div>
+        <div class="d">Asked about the company, it opens with <i>"I can't see your finances, team or
+           capacity"</i> — and answers only from what it can read. <b>It refuses to invent numbers.</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>ITMO Accelerator · Fall 2026</span><span class="pg">04</span></div>
+</section>
+
+<!-- ============ 05 · SOLUTION: EASE OF USE ============ -->
+<section class="s alt n05">
+  <div class="hd"><span class="brand">MindShop AI</span><span class="chap">Solution</span></div>
+  <div class="bd">
+    <h2>Reachable on <em>the platforms you already use</em></h2>
+    <p class="sub">The shop is operated from a messenger — Telegram first, with the same agent core behind
+       the other major messaging platforms.</p>
+    <div class="rows">
+      <div class="row">
+        <div class="no">01</div>
+        <div class="t">It comes to where the owner already is</div>
+        <div class="d">Telegram today, where a Russian seller already spends the day. The same agent core
+           connects to <b>the other major messaging platforms</b>, so the shop can be run from wherever the
+           owner and the team actually are — one agent, many doors.</div>
+      </div>
+      <div class="row">
+        <div class="no">02</div>
+        <div class="t">Nothing to adopt, nothing to learn</div>
+        <div class="d">You type a request in plain language and the work gets done. <b>No new app to install
+           and no admin panel to sit through</b> — the owners this is built for have no marketing team, but
+           every one of them already types messages on a phone.</div>
+      </div>
+      <div class="row">
+        <div class="no">03</div>
+        <div class="t">Hands-off whenever you want it</div>
+        <div class="d">The demo shows the approval mode — every publish stops for a yes/no. Switch the gate
+           off and the same workflows <b>publish unattended</b>, triggered by the agent's scheduler on a
+           timer. <b>Both modes are built in today.</b></div>
+      </div>
+    </div>
+    <p class="kicker-out">You speak business — <i>"those older products aren't good enough"</i> — and the
+       agent does the rest.</p>
+  </div>
+  <div class="ft"><span>ITMO Accelerator · Fall 2026</span><span class="pg">05</span></div>
+</section>
+
+<!-- ============ 06 · RESULTS: EVIDENCE ============ -->
+<section class="s n06">
+  <div class="hd"><span class="brand">MindShop AI</span><span class="chap">Results · 4:54, one take</span></div>
+  <div class="bd">
+    <h2>Six requests, six real outcomes</h2>
+    <p class="sub">Typed into one chat, in this order, in a single unedited take. Every outcome below was
+       <b>verified on the live site</b> by the agent itself.</p>
+    <div class="tl">
+      <div class="li"><div class="tc">0:19</div>
+        <div class="tk">Wrote and published an article<br><span>after checking its own posts for overlap</span></div>
+        <div class="tvNone">Content publishing</div></div>
+      <div class="li"><div class="tc">0:44</div>
+        <div class="tk">Created a product the catalogue was missing<br><span>no packaging paper at all</span></div>
+        <div class="tvNone">Catalogue management</div></div>
+      <div class="li"><div class="tc">2:00</div>
+        <div class="tk">Audited the catalogue and reported instead of editing<br><span>"both are your call"</span></div>
+        <div class="tv n">Quality audit</div></div>
+      <div class="li"><div class="tc">2:36</div>
+        <div class="tk">Rewrote two listings on request<br><span>fixed five-section structure</span></div>
+        <div class="tvNone">Copywriting</div></div>
+      <div class="li"><div class="tc">3:00</div>
+        <div class="tk">Translated both into English<br><span>warned about a mixed catalogue first</span></div>
+        <div class="tv n">Localisation</div></div>
+      <div class="li"><div class="tc">4:11</div>
+        <div class="tk">Audited the site and the business<br><span>read-only, code untouched</span></div>
+        <div class="tvNone">Site &amp; business diagnosis</div></div>
+    </div>
+  </div>
+  <div class="ft"><span>ITMO Accelerator · Fall 2026</span><span class="pg">06</span></div>
+</section>
+
+<!-- ============ 07 · RESULTS: STATUS (deep band) ============ -->
+<section class="s deep n07">
+  <div class="hd"><span class="brand">MindShop AI</span><span class="chap">Results · status</span></div>
+  <div class="bd">
+    <h2>It runs on a <em>live commercial site</em> today</h2>
+    <ul class="facts">
+      <li><span>Two workflows are live today: <b>news collection, writing and publication</b> (Chinese and
+        Russian sources) and <b>competitor research → product creation and optimisation</b>. Both act
+        through the site's own admin APIs.</span></li>
+      <li><span>Both run in <b>two modes</b>: approval-first, which the demo shows, and fully unattended,
+        where generation goes live with no approval step and the agent's scheduler triggers it on a
+        timer.</span></li>
+      <li><span>The pilot is <b>one real factory</b> — a normal small manufacturer, operating normally while
+        the agent works on its live site.</span></li>
+      <li><span><b>Where it stops today:</b> no commercial revenue yet, no second shop onboarded, and the
+        customer-service workflow is planned rather than built.</span></li>
+      <li><span>Everything claimed here is visible in the <b>4:54 recording</b> — the video is the evidence,
+        this deck is only the summary.</span></li>
+    </ul>
+  </div>
+  <div class="ft"><span>ITMO Accelerator · Fall 2026</span><span class="pg">07</span></div>
+</section>
+
+<!-- ============ 08 · VISION ============ -->
+<section class="s n08">
+  <div class="hd"><span class="brand">MindShop AI</span><span class="chap">Vision</span></div>
+  <div class="bd">
+    <h2>Same engine, <em>next backends</em></h2>
+    <div class="stack">
+      <div class="layer">
+        <div class="lb">The core · open source (MIT)</div>
+        <div class="tx">Built on a <b>mature, MIT-licensed open-source agent architecture</b>. The product
+          starts with capabilities that would otherwise take months to build — persistent memory,
+          self-editing procedures, tool permissions, scheduled runs. <b>All of the engineering then goes
+          into the layer that is specific to the shop.</b></div>
+      </div>
+      <div class="layer l2">
+        <div class="lb">The product</div>
+        <div class="tx">On top of that core we build the shop-specific layer: its knowledge and rules, the
+          content and catalogue workflows, the operating procedures, and the API integrations that let the
+          agent act on a real shop instead of talking about one.</div>
+      </div>
+      <div class="layer l3">
+        <div class="lb">What's next</div>
+        <div class="tx"><b>Per shop, not per industry.</b> Multi-shop onboarding, the customer-service
+          workflow, and the same engine pointed at marketplace seller APIs and hosted storefronts — a
+          different backend, not a different product.</div>
+      </div>
+    </div>
+    <div class="cta">
+      <div>
+        <div class="k">Live demo &amp; 4:54 video</div>
+        <div class="v todo">[ 部署后填入网页地址 ]</div>
+      </div>
+      <div style="text-align:right">
+        <div class="k">Yu Pengju · MindShop AI</div>
+        <div class="v"><b>Telegram</b> <a href="https://t.me/WatertMonkey" target="_blank" rel="noopener">@WatertMonkey</a> &nbsp;·&nbsp; <b>Email</b> <a href="mailto:864200476@qq.com">864200476@qq.com</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>ITMO Accelerator · Fall 2026</span><span class="pg">08</span></div>
+</section>
+
+<script>
+  function fit(){
+    document.documentElement.style.zoom = Math.min(1, (window.innerWidth - 28) / 1280);
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('beforeprint', function(){ document.documentElement.style.zoom = 1; });
+  window.addEventListener('afterprint', fit);
+  fit();
+
+  var slides = [].slice.call(document.querySelectorAll('.s'));
+  var KEY = 'mindshop-deck-editorial-slide';
+  var cur = parseInt(localStorage.getItem(KEY) || '0', 10);
+  if (cur > 0 && cur < slides.length) slides[cur].scrollIntoView();
+  function go(i){
+    cur = Math.max(0, Math.min(slides.length - 1, i));
+    localStorage.setItem(KEY, cur);
+    slides[cur].scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  document.addEventListener('keydown', function(e){
+    if (['ArrowRight','ArrowDown','PageDown',' '].indexOf(e.key) > -1){ e.preventDefault(); go(cur + 1); }
+    if (['ArrowLeft','ArrowUp','PageUp'].indexOf(e.key) > -1){ e.preventDefault(); go(cur - 1); }
+  });
+</script>
+</body>
+</html>
